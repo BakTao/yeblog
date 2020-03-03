@@ -21,10 +21,16 @@ public class AmdinLoginController {
 
     @PostMapping("/adminLogin")
     public Response<AdminUserDTO> login(@RequestBody AdminUserDTO adminUser){
+        //通过用户名和密码获得用户信息
         AdminUserDTO adminUserDTO = adminLoginService.getAdminUserInfo(adminUser);
 
-        String token = jwtUtils.getToken(adminUserDTO.getLoginId(), adminUserDTO.getName(), new HashMap<>());
+        //用户名和密码错误
+        if(adminUserDTO == null){
+            return new Response<>("601", "用户名或密码有误,请重新输入");
+        }
 
+        //获取token
+        String token = jwtUtils.getToken(adminUserDTO.getLoginId(), adminUserDTO.getName(), new HashMap<>());
         adminUserDTO.setToken(token);
 
         return Response.successData(adminUserDTO);
