@@ -20,10 +20,6 @@ public class AdminUserDTO {
 
     private String lastLogTime; //上次登录时间
 
-    private String userPhoto;   //头像
-
     private String token;       //登录令牌
-
-
 
 }

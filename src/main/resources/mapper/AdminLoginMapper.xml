@@ -8,8 +8,7 @@
         t.loginid loginId,
         t.password password,
         t.lastlogip lastLogIp,
-        t.lastlogtime lastLogTime,
-        t.userphoto userPhoto
+        t.lastlogtime lastLogTime
         from sys_user_admin t
         where t.loginid = #{loginId}
         and t.password = #{password}
