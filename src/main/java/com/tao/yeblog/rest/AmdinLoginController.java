@@ -3,27 +3,27 @@ package com.tao.yeblog.rest;
 import com.tao.yeblog.common.JwtUtils;
 import com.tao.yeblog.common.Response;
 import com.tao.yeblog.model.dto.AdminUserDTO;
+import com.tao.yeblog.service.IAdminLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/back/userServices")
+@RequestMapping("/back/loginServices")
 public class AmdinLoginController {
 
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    private IAdminLoginService adminLoginService;
+
     @PostMapping("/adminLogin")
-
     public Response<AdminUserDTO> login(@RequestBody AdminUserDTO adminUser){
-        String loginId = adminUser.getLoginId();
-        //String name = adminUser.getName();
+        AdminUserDTO adminUserDTO = adminLoginService.getAdminUserInfo(adminUser);
 
-        String token = jwtUtils.getToken(loginId, "admin", new HashMap<>());
-
-        AdminUserDTO adminUserDTO = new AdminUserDTO();
+        String token = jwtUtils.getToken(adminUserDTO.getLoginId(), adminUserDTO.getName(), new HashMap<>());
 
         adminUserDTO.setToken(token);
 

@@ -1,7 +1,6 @@
 package com.tao.yeblog.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.tao.yeblog.common.BasePage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AdminUserDTO extends BasePage {
+public class AdminUserDTO {
     private String loginId;     //登录id
 
     private String password;    //密码

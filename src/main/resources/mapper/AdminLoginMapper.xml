@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.yeblog.dao.AdminLoginMapper">
+
+    <select id="getAdminUserInfo" parameterType="com.tao.yeblog.model.dto.AdminUserDTO"
+            resultType="com.tao.yeblog.model.dto.AdminUserDTO">
+        select t.name name,
+        t.loginid loginId,
+        t.password password,
+        t.lastlogip lastLogIp,
+        t.lastlogtime lastLogTime,
+        t.userphoto userPhoto
+        from sys_user_admin t
+        where t.loginid = #{loginId}
+        and t.password = #{password}
+    </select>
+
+</mapper>

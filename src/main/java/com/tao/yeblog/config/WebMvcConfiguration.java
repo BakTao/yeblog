@@ -27,7 +27,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //登录请求不拦截
-        registry.addInterceptor(getLoginInterceptor()).excludePathPatterns("/back/userServices/adminLogin");
+        registry.addInterceptor(getLoginInterceptor()).excludePathPatterns("/back/loginServices/adminLogin");
     }
 
     protected class LoginInterceptor extends HandlerInterceptorAdapter {
