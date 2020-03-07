@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.yeblog.dao.DataTotalMapper">
+
+    <select id="getRegisterCountByYear" parameterType="com.tao.yeblog.model.qo.RegisterChartsQO"
+            resultType="com.tao.yeblog.model.dto.RegisterChartsDTO">
+      select count(*) value,
+      DATE_FORMAT(t.regtime,'%Y年') tjny
+      from blog_user t
+      where 1=1
+      and DATE_FORMAT(t.regtime,'%Y') in
+      <foreach collection="tjnys" item="tjny" open="(" close=")" separator=",">
+          #{tjny}
+      </foreach>
+      group by DATE_FORMAT(regtime,'%Y');
+    </select>
+
+    <select id="getRegisterCountByMonth" parameterType="com.tao.yeblog.model.qo.RegisterChartsQO"
+            resultType="com.tao.yeblog.model.dto.RegisterChartsDTO">
+        select count(*) value,
+        DATE_FORMAT(t.regtime,'%Y年%m月') tjny
+        from blog_user t
+        where 1=1
+        and DATE_FORMAT(t.regtime,'%Y-%m') in
+        <foreach collection="tjnys" item="tjny" open="(" close=")" separator=",">
+            #{tjny}
+        </foreach>
+        group by DATE_FORMAT(regtime,'%Y-%m');
+    </select>
+
+    <select id="getRegisterCountByDay" parameterType="com.tao.yeblog.model.qo.RegisterChartsQO"
+            resultType="com.tao.yeblog.model.dto.RegisterChartsDTO">
+        select count(*) value,
+        DATE_FORMAT(t.regtime,'%Y年%m月%d日') tjny
+        from blog_user t
+        where 1=1
+        and DATE_FORMAT(t.regtime,'%Y-%m-%d') in
+        <foreach collection="tjnys" item="tjny" open="(" close=")" separator=",">
+            #{tjny}
+        </foreach>
+        group by DATE_FORMAT(regtime,'%Y-%m-%d');
+    </select>
+</mapper>

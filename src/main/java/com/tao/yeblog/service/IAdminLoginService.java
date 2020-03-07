@@ -10,4 +10,10 @@ public interface IAdminLoginService {
      * @return
      */
     AdminUserDTO getAdminUserInfo(AdminUserDTO adminUserDTO);
+
+    /**
+     * 更新用户信息
+     * @param adminUserDTO
+     */
+    void updateAdminUserInfo(AdminUserDTO adminUserDTO);
 }

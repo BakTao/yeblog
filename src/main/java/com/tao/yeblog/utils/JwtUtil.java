@@ -1,4 +1,4 @@
-package com.tao.yeblog.common;
+package com.tao.yeblog.utils;
 
 import io.jsonwebtoken.*;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Component
 @Data
-public class JwtUtils {
+public class JwtUtil {
 
     @Value("${jwt.config.key}")
     private String key;

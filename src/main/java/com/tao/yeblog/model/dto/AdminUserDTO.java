@@ -22,4 +22,8 @@ public class AdminUserDTO {
 
     private String token;       //登录令牌
 
+    private String logIp;   //本次登录ip
+
+    private String logTime; //本次登录时间
+
 }

@@ -17,4 +17,9 @@ public class AdminLoginService implements IAdminLoginService {
 
         return adminLoginMapper.getAdminUserInfo(adminUserDTO);
     }
+
+    @Override
+    public void updateAdminUserInfo(AdminUserDTO adminUserDTO) {
+        adminLoginMapper.updateAdminUserInfo(adminUserDTO);
+    }
 }

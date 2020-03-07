@@ -14,4 +14,17 @@
         and t.password = #{password}
     </select>
 
+    <select id="updateAdminUserInfo" parameterType="com.tao.yeblog.model.dto.AdminUserDTO">
+        update sys_user_admin t
+        <set>
+            <if test="logIp != null and logIp != '' ">
+                t.lastlogip = #{logIp},
+            </if>
+            <if test="logTime != null and logTime != '' ">
+                t.lastlogtime = sysdate(),
+            </if>
+        </set>
+        where t.loginid = #{loginId}
+        and t.password = #{password}
+    </select>
 </mapper>

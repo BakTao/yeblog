@@ -1,6 +1,6 @@
 package com.tao.yeblog.config;
 
-import com.tao.yeblog.common.JwtUtils;
+import com.tao.yeblog.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Autowired
-    private JwtUtils jwtUtils;
+    private JwtUtil jwtUtil;
 
     @Bean
     public LoginInterceptor getLoginInterceptor(){
@@ -27,7 +27,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //登录请求不拦截
-        registry.addInterceptor(getLoginInterceptor()).excludePathPatterns("/back/loginServices/adminLogin");
+        //registry.addInterceptor(getLoginInterceptor()).excludePathPatterns("/back/loginServices/adminLogin");
     }
 
     protected class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -46,7 +46,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
             Claims claims = null;
             try{
                 //解析token
-                claims = jwtUtils.parseToken(token);
+                claims = jwtUtil.parseToken(token);
             }catch (ExpiredJwtException e){
                 response.setStatus(402);
                 response.sendError(402, "登录信息过期，请重新登录");
