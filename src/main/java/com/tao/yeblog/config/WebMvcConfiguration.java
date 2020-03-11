@@ -36,8 +36,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
             String header = request.getHeader("Authorization");
 
             if(header == null || !header.startsWith("ym:")){
-                response.setStatus(401);
-                response.sendError(401, "用户未登录,请重新登录");
+                response.setStatus(602);
+                response.sendError(602, "用户未登录,请重新登录");
                 return false;
             }
 
@@ -48,14 +48,14 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 //解析token
                 claims = jwtUtil.parseToken(token);
             }catch (ExpiredJwtException e){
-                response.setStatus(402);
-                response.sendError(402, "登录信息过期，请重新登录");
+                response.setStatus(603);
+                response.sendError(603, "登录信息过期，请重新登录");
                 return false;
             }
 
             if(claims == null){
-                response.setStatus(401);
-                response.sendError(401, "用户未登录,请重新登录");
+                response.setStatus(602);
+                response.sendError(602, "用户未登录,请重新登录");
                 return false;
             }
 
