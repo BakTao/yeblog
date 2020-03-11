@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface DataTotalMapper {
+public interface RegisterTotalMapper {
 
     /**
      * 通过年获取注册量

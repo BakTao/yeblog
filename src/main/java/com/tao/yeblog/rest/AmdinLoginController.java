@@ -24,6 +24,12 @@ public class AmdinLoginController {
     @Autowired
     private IAdminLoginService adminLoginService;
 
+    /**
+     * 登录接口
+     * @param adminUser
+     * @param request
+     * @return
+     */
     @PostMapping("/adminLogin")
     public Response<AdminUserDTO> login(@RequestBody AdminUserDTO adminUser, HttpServletRequest request){
         //通过用户名和密码获得用户信息
