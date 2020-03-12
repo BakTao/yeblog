@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tao.yeblog.dao.UserMapper">
+<mapper namespace="com.tao.yeblog.dao.BlogMapper">
 
-    <select id="pageUserInfo" parameterType="com.tao.yeblog.model.qo.UserQO"
-            resultType="com.tao.yeblog.model.dto.UserDTO">
+    <select id="pageBlogInfo" parameterType="com.tao.yeblog.model.qo.BlogQO"
+            resultType="com.tao.yeblog.model.dto.BlogDTO">
       select t1.name name,
       t1.sex sex,
       t1.loginid loginId,
@@ -20,7 +20,7 @@
       left join blog t2 on t1.id = t2.userid
     </select>
 
-    <update id="updateUserInfo" parameterType="com.tao.yeblog.model.qo.UserQO">
+    <update id="updateBlogInfo" parameterType="com.tao.yeblog.model.qo.UserQO">
       update blog_user t
       <set>
         <if test="enable != null and enable != ''">
