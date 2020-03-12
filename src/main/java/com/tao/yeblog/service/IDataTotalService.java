@@ -5,6 +5,9 @@ import com.tao.yeblog.model.qo.RegisterChartsQO;
 
 import java.util.List;
 
+/**
+ * 数据统计Service
+ */
 public interface IDataTotalService {
 
     /**

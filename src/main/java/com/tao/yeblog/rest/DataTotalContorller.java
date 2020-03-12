@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * 数据统计Controller
+ */
 @RestController
 @RequestMapping("/back/dataTotal")
 public class DataTotalContorller {

@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 注册量统计DTO
+ * 订单量统计DTO
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RegisterChartsDTO {
+public class OrderChartsDTO {
 
     private String tjny;    //统计年月
 

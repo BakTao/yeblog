@@ -3,6 +3,9 @@ package com.tao.yeblog.dao;
 import com.tao.yeblog.model.dto.AdminUserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+/**
+ * 管理员登录Mapper
+ */
 @Mapper
 public interface AdminLoginMapper {
 

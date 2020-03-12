@@ -5,6 +5,9 @@ import com.tao.yeblog.model.dto.UserDTO;
 import com.tao.yeblog.model.qo.UserQO;
 import org.apache.ibatis.annotations.Mapper;
 
+/**
+ * 用户管理Mapper
+ */
 @Mapper
 public interface UserMapper {
 

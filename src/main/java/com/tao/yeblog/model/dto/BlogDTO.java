@@ -3,10 +3,10 @@ package com.tao.yeblog.model.dto;
 import lombok.Data;
 
 /**
- * 用户信息DTO
+ * 博客信息DTO
  */
 @Data
-public class UserDTO {
+public class BlogDTO {
 
     private String name;    //名字
 

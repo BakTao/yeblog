@@ -1,13 +1,15 @@
-package com.tao.yeblog.service;
+package com.tao.yeblog.dao;
 
 import com.tao.yeblog.common.IPage;
 import com.tao.yeblog.model.dto.UserDTO;
 import com.tao.yeblog.model.qo.UserQO;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 用户管理Service
+ * 专栏管理Mapper
  */
-public interface IUserService {
+@Mapper
+public interface ColumnMapper {
 
     /**
      * 获取用户信息

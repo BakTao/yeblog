@@ -4,10 +4,10 @@ import com.tao.yeblog.common.BasePage;
 import lombok.Data;
 
 /**
- * 用户信息QO
+ * 订单信息QO
  */
 @Data
-public class UserQO extends BasePage {
+public class OrderQO extends BasePage {
 
     private String name;    //名字
 

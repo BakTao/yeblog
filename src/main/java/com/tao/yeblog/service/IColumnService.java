@@ -5,9 +5,9 @@ import com.tao.yeblog.model.dto.UserDTO;
 import com.tao.yeblog.model.qo.UserQO;
 
 /**
- * 用户管理Service
+ * 专栏管理Service
  */
-public interface IUserService {
+public interface IColumnService {
 
     /**
      * 获取用户信息

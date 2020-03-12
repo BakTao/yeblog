@@ -3,10 +3,10 @@ package com.tao.yeblog.model.qo;
 import lombok.Data;
 
 /**
- * 注册量统计QO
+ * 订单量统计QO
  */
 @Data
-public class RegisterChartsQO {
+public class OrderChartsQO {
 
     private String tjnys[]; //统计年月
 

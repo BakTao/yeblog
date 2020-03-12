@@ -13,6 +13,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 配置类
+ */
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 

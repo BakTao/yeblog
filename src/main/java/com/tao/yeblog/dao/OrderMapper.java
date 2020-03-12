@@ -7,10 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * 注册量统计Mapper
+ * 订单管理Mapper
  */
 @Mapper
-public interface RegisterTotalMapper {
+public interface OrderMapper {
 
     /**
      * 通过年获取注册量

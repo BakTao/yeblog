@@ -2,6 +2,9 @@ package com.tao.yeblog.service;
 
 import com.tao.yeblog.model.dto.AdminUserDTO;
 
+/**
+ * 管理员登录Service
+ */
 public interface IAdminLoginService {
 
     /**

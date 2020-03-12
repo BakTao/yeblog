@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 用户管理Controller
+ * 博客管理Controller
  */
 @RestController
 @RequestMapping("/back/userServices")
-public class UserController {
+public class BlogController {
 
     @Autowired
     private IUserService userService;

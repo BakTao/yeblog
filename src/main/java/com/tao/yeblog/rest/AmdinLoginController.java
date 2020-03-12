@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
+/**
+ * 用户登录Controller
+ */
 @RestController
 @RequestMapping("/back/loginServices")
 public class AmdinLoginController {
