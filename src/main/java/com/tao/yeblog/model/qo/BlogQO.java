@@ -9,13 +9,16 @@ import lombok.Data;
 @Data
 public class BlogQO extends BasePage {
 
-    private String name;    //名字
+    private String blogId;  //博客id
 
-    private String loginId; //登录Id
+    private String userId; //用户Id
 
-    private String sex;     //性别
+    private String columnId; //专栏id
 
-    private String phone;   //手机号码
+    private String title;   //标题
 
-    private String email;   //邮箱
+    private String type;   //类型
+
+    private String enable; //是否有效
+
 }

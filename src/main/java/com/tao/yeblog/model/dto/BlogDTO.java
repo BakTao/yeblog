@@ -8,28 +8,24 @@ import lombok.Data;
 @Data
 public class BlogDTO {
 
-    private String name;    //名字
+    private String blogId;  //博客id
 
-    private String loginId; //登录Id
+    private String userId; //用户Id
 
-    private String sex;     //性别
+    private String userName; //用户名称
 
-    private String phone;   //手机号码
+    private String columnId; //专栏id
 
-    private String email;   //邮箱
+    private String columnName; //专栏名称
 
-    private String lastLogIp;   //上次登录ip
+    private String title;   //标题
 
-    private String lastLogTime; //上次登录时间
+    private String type;   //类型
 
-    private String userPhoto; //头像
+    private String content; //内容
 
-    private String regTime; //注册时间
+    private String cover; //封面
 
     private String enable; //是否有效
-
-    private String reason; //失效原因
-
-    private String blogCount; //博客数量
 
 }

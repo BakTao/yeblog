@@ -4,32 +4,31 @@
 
     <select id="pageBlogInfo" parameterType="com.tao.yeblog.model.qo.BlogQO"
             resultType="com.tao.yeblog.model.dto.BlogDTO">
-      select t1.name name,
-      t1.sex sex,
-      t1.loginid loginId,
-      t1.lastlogip lastLogIp,
-      t1.lastlogtime lastLogTime,
-      t1.userphoto userPhoto,
-      t1.regtime regTime,
-      t1.phone phone,
-      t1.email email,
+      select t1.blogid blodId,
+      t1.userid userId,
+      t2.name userName,
+      t1.columnid columnId,
+      t3.name columnName,
+      t1.title title,
+      t1.type type,
       t1.enable enable,
-      t1.reason reason,
-      count(t1.id) blogCount
-      from blog_user t1
-      left join blog t2 on t1.id = t2.userid
+      t1.content content,
+      t1.cover cover
+      from blog t1
+      left join blog_user t2 on t1.userid = t2.id
+      left join column t3 on t1.columnid = t3.columnid
     </select>
 
-    <update id="updateBlogInfo" parameterType="com.tao.yeblog.model.qo.UserQO">
-      update blog_user t
+    <update id="updateBlogInfo" parameterType="com.tao.yeblog.model.dto.BlogDTO">
+      update blog t
       <set>
         <if test="enable != null and enable != ''">
           t.enable = #{enable}
         </if>
-      </set> enable = '0'
+      </set>
       where 1=1
-      <if test="loginId != null and loginId != ''">
-        t.loginid = #{loginId}
+      <if test="blogId != null and blogId != ''">
+        t.blogid = #{blogId}
       </if>
     </update>
 

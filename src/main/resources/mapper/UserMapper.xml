@@ -20,13 +20,13 @@
       left join blog t2 on t1.id = t2.userid
     </select>
 
-    <update id="updateUserInfo" parameterType="com.tao.yeblog.model.qo.UserQO">
+    <update id="updateUserInfo" parameterType="com.tao.yeblog.model.dto.UserDTO">
       update blog_user t
       <set>
         <if test="enable != null and enable != ''">
           t.enable = #{enable}
         </if>
-      </set> enable = '0'
+      </set>
       where 1=1
       <if test="loginId != null and loginId != ''">
         t.loginid = #{loginId}

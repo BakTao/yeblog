@@ -11,11 +11,6 @@ public class ColumnQO extends BasePage {
 
     private String name;    //名字
 
-    private String loginId; //登录Id
+    private String columnId; //专栏Id
 
-    private String sex;     //性别
-
-    private String phone;   //手机号码
-
-    private String email;   //邮箱
 }
