@@ -11,11 +11,19 @@ public class ShopQO extends BasePage {
 
     private String name;    //名字
 
-    private String loginId; //登录Id
+    private String goodsId; //商品Id
 
-    private String sex;     //性别
+    private String nums;     //数量
 
-    private String phone;   //手机号码
+    private String buyNums;     //购买数量
 
-    private String email;   //邮箱
+    private String price;   //价格
+
+    private String photo;   //图片
+
+    private String type;   //类型
+
+    private String content;   //商品介绍
+
+
 }

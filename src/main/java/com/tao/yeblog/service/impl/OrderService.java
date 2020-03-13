@@ -1,9 +1,9 @@
 package com.tao.yeblog.service.impl;
 
 import com.tao.yeblog.common.IPage;
-import com.tao.yeblog.dao.UserMapper;
-import com.tao.yeblog.model.dto.UserDTO;
-import com.tao.yeblog.model.qo.UserQO;
+import com.tao.yeblog.dao.OrderMapper;
+import com.tao.yeblog.model.dto.OrderDTO;
+import com.tao.yeblog.model.qo.OrderQO;
 import com.tao.yeblog.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class OrderService implements IOrderService {
 
     @Autowired
-    private UserMapper userMapper;
+    private OrderMapper orderMapper;
 
     @Override
-    public IPage<UserDTO> pageUserInfo(UserQO userQO) {
-        return userMapper.pageUserInfo(userQO);
+    public IPage<OrderDTO> pageOrderInfo(OrderQO orderQO) {
+        return orderMapper.pageOrderInfo(orderQO);
     }
 }

@@ -1,8 +1,8 @@
 package com.tao.yeblog.service;
 
 import com.tao.yeblog.common.IPage;
-import com.tao.yeblog.model.dto.UserDTO;
-import com.tao.yeblog.model.qo.UserQO;
+import com.tao.yeblog.model.dto.ColumnDTO;
+import com.tao.yeblog.model.qo.ColumnQO;
 
 /**
  * 专栏管理Service
@@ -10,9 +10,9 @@ import com.tao.yeblog.model.qo.UserQO;
 public interface IColumnService {
 
     /**
-     * 获取用户信息
-     * @param userQO
+     * 获取专栏信息
+     * @param columnQO
      * @return
      */
-    IPage<UserDTO> pageUserInfo(UserQO userQO);
+    IPage<ColumnDTO> pageColumnInfo(ColumnQO columnQO);
 }

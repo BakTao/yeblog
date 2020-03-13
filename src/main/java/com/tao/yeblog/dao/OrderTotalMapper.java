@@ -1,7 +1,7 @@
 package com.tao.yeblog.dao;
 
-import com.tao.yeblog.model.dto.RegisterChartsDTO;
-import com.tao.yeblog.model.qo.RegisterChartsQO;
+import com.tao.yeblog.model.dto.OrderChartsDTO;
+import com.tao.yeblog.model.qo.OrderChartsQO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,23 +13,23 @@ import java.util.List;
 public interface OrderTotalMapper {
 
     /**
-     * 通过年获取注册量
-     * @param registerChartsQO
+     * 通过年获取订单量
+     * @param orderChartsQO
      * @return
      */
-    List<RegisterChartsDTO> getRegisterCountByYear(RegisterChartsQO registerChartsQO);
+    List<OrderChartsDTO> getOrderCountByYear(OrderChartsQO orderChartsQO);
 
     /**
-     * 通过月获取注册量
-     * @param registerChartsQO
+     * 通过月获取订单量
+     * @param orderChartsQO
      * @return
      */
-    List<RegisterChartsDTO> getRegisterCountByMonth(RegisterChartsQO registerChartsQO);
+    List<OrderChartsDTO> getOrderCountByMonth(OrderChartsQO orderChartsQO);
 
     /**
-     * 通过天获取注册量
-     * @param registerChartsQO
+     * 通过天获取订单量
+     * @param orderChartsQO
      * @return
      */
-    List<RegisterChartsDTO> getRegisterCountByDay(RegisterChartsQO registerChartsQO);
+    List<OrderChartsDTO> getOrderCountByDay(OrderChartsQO orderChartsQO);
 }

@@ -1,8 +1,8 @@
 package com.tao.yeblog.service;
 
 import com.tao.yeblog.common.IPage;
-import com.tao.yeblog.model.dto.UserDTO;
-import com.tao.yeblog.model.qo.UserQO;
+import com.tao.yeblog.model.dto.BlogDTO;
+import com.tao.yeblog.model.qo.BlogQO;
 
 /**
  * 博客管理Service
@@ -11,8 +11,14 @@ public interface IBlogService {
 
     /**
      * 获取用户信息
-     * @param userQO
+     * @param blogQO
      * @return
      */
-    IPage<UserDTO> pageUserInfo(UserQO userQO);
+    IPage<BlogDTO> pageBlogInfo(BlogQO blogQO);
+
+    /**
+     * 更新用户信息
+     * @param blogDTO
+     */
+    void updateBlogInfo(BlogDTO blogDTO);
 }

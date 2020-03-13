@@ -2,10 +2,11 @@ package com.tao.yeblog.rest;
 
 import com.tao.yeblog.common.IPage;
 import com.tao.yeblog.common.Response;
-import com.tao.yeblog.model.dto.UserDTO;
-import com.tao.yeblog.model.qo.UserQO;
-import com.tao.yeblog.service.IUserService;
+import com.tao.yeblog.model.dto.BlogDTO;
+import com.tao.yeblog.model.qo.BlogQO;
+import com.tao.yeblog.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,19 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
  * 博客管理Controller
  */
 @RestController
-@RequestMapping("/back/userServices")
+@RequestMapping("/back/blogServices")
 public class BlogController {
 
     @Autowired
-    private IUserService userService;
+    private IBlogService blogService;
 
     /**
-     * 获取用户信息
-     * @param userQO
+     * 获取博客信息
+     * @param blogQO
      * @return
      */
-    @RequestMapping("/pageUserInfo")
-    public Response<IPage<UserDTO>> pageUserInfo(UserQO userQO){
-        return Response.successData(userService.pageUserInfo(userQO));
+    @PostMapping("/pageBlogInfo")
+    public Response<IPage<BlogDTO>> pageBlogInfo(BlogQO blogQO){
+        return Response.successData(blogService.pageBlogInfo(blogQO));
     }
 }

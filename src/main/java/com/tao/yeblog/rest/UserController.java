@@ -6,6 +6,7 @@ import com.tao.yeblog.model.dto.UserDTO;
 import com.tao.yeblog.model.qo.UserQO;
 import com.tao.yeblog.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class UserController {
      * @param userQO
      * @return
      */
-    @RequestMapping("/pageUserInfo")
+    @PostMapping("/pageUserInfo")
     public Response<IPage<UserDTO>> pageUserInfo(UserQO userQO){
         return Response.successData(userService.pageUserInfo(userQO));
     }

@@ -1,8 +1,8 @@
 package com.tao.yeblog.service;
 
 import com.tao.yeblog.common.IPage;
-import com.tao.yeblog.model.dto.UserDTO;
-import com.tao.yeblog.model.qo.UserQO;
+import com.tao.yeblog.model.dto.ShopDTO;
+import com.tao.yeblog.model.qo.ShopQO;
 
 /**
  * 商城管理Service
@@ -10,9 +10,9 @@ import com.tao.yeblog.model.qo.UserQO;
 public interface IShopService {
 
     /**
-     * 获取用户信息
-     * @param userQO
+     * 获取商品信息
+     * @param shopQO
      * @return
      */
-    IPage<UserDTO> pageUserInfo(UserQO userQO);
+    IPage<ShopDTO> pageShopInfo(ShopQO shopQO);
 }

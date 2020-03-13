@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.yeblog.dao.OrderMapper">
+
+    <select id="pageOrderInfo" parameterType="com.tao.yeblog.model.qo.OrderQO"
+            resultType="com.tao.yeblog.model.dto.OrderDTO">
+      select t1.orderid orderId,
+      t1.userid userId,
+      t2.name userName,
+      t1.price price,
+      t1.enable enable,
+      t1.price price,
+      t1.createtime createTime,
+      t1.address address,
+      t1.remark remark
+      from order t1
+    </select>
+
+</mapper>

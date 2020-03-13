@@ -2,9 +2,9 @@ package com.tao.yeblog.rest;
 
 import com.tao.yeblog.common.IPage;
 import com.tao.yeblog.common.Response;
-import com.tao.yeblog.model.dto.UserDTO;
-import com.tao.yeblog.model.qo.UserQO;
-import com.tao.yeblog.service.IUserService;
+import com.tao.yeblog.model.dto.ShopDTO;
+import com.tao.yeblog.model.qo.ShopQO;
+import com.tao.yeblog.service.IShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
  * 商城管理Controller
  */
 @RestController
-@RequestMapping("/back/userServices")
+@RequestMapping("/back/shopServices")
 public class ShopController {
 
     @Autowired
-    private IUserService userService;
+    private IShopService shopService;
 
     /**
-     * 获取用户信息
-     * @param userQO
+     * 获取商品信息
+     * @param shopQO
      * @return
      */
-    @RequestMapping("/pageUserInfo")
-    public Response<IPage<UserDTO>> pageUserInfo(UserQO userQO){
-        return Response.successData(userService.pageUserInfo(userQO));
+    @RequestMapping("/pageShopInfo")
+    public Response<IPage<ShopDTO>> pageShopInfo(ShopQO shopQO){
+        return Response.successData(shopService.pageShopInfo(shopQO));
     }
 }

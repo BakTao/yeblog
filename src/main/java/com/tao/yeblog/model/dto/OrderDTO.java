@@ -8,28 +8,20 @@ import lombok.Data;
 @Data
 public class OrderDTO {
 
-    private String name;    //名字
+    private String orderId;     //订单id
 
-    private String loginId; //登录Id
+    private String userId;    //购买人id
 
-    private String sex;     //性别
+    private String userName;    //购买人名称
 
-    private String phone;   //手机号码
+    private String price;       //总价格
 
-    private String email;   //邮箱
+    private String enable;     //是否有效
 
-    private String lastLogIp;   //上次登录ip
+    private String createTime;   //创建时间
 
-    private String lastLogTime; //上次登录时间
+    private String address;   //地址
 
-    private String userPhoto; //头像
-
-    private String regTime; //注册时间
-
-    private String enable; //是否有效
-
-    private String reason; //失效原因
-
-    private String blogCount; //博客数量
+    private String remark;   //备注
 
 }

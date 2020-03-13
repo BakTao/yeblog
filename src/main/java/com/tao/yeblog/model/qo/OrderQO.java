@@ -9,13 +9,17 @@ import lombok.Data;
 @Data
 public class OrderQO extends BasePage {
 
-    private String name;    //名字
+    private String orderId;     //订单id
 
-    private String loginId; //登录Id
+    private String userId;    //购买人id
 
-    private String sex;     //性别
+    private String price;       //总价格
 
-    private String phone;   //手机号码
+    private String enable;     //是否有效
 
-    private String email;   //邮箱
+    private String createTime;   //创建时间
+
+    private String address;   //地址
+
+    private String remark;   //备注
 }
