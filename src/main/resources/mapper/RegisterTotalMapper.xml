@@ -4,40 +4,94 @@
 
     <select id="getRegisterCountByYear" parameterType="com.tao.yeblog.model.qo.RegisterChartsQO"
             resultType="com.tao.yeblog.model.dto.RegisterChartsDTO">
-      select count(*) value,
-      DATE_FORMAT(t.regtime,'%Y年') tjny
-      from blog_user t
-      where 1=1
-      and DATE_FORMAT(t.regtime,'%Y') in
-      <foreach collection="tjnys" item="tjny" open="(" close=")" separator=",">
-          #{tjny}
-      </foreach>
-      group by DATE_FORMAT(regtime,'%Y');
+        select t1.day tjny,
+        ifnull(t2.value, 0) value
+        from
+        (
+            select DATE_FORMAT(@cdate := DATE_ADD(@cdate, INTERVAL -1 year), '%Y年') day
+            from
+            (
+                select @cdate := DATE_ADD(sysdate(), INTERVAL+ 1 year)
+                from blog_user
+            ) t0
+            limit 5
+        ) t1
+        left join
+        (
+            select count(*) value,
+            DATE_FORMAT(t.regtime, '%Y年') tjny
+            from blog_user t
+            where 1= 1
+            <if test=" tjnyq != null and tjnyq != ''">
+                and DATE_FORMAT(t.regtime,'%Y') >= #{tjnyq}
+            </if>
+            <if test=" tjnyz != null and tjnyz != ''">
+                and DATE_FORMAT(t.regtime,'%Y') &lt;= #{tjnyz}
+            </if>
+            group by DATE_FORMAT(regtime, '%Y')
+        ) t2 on t1.day= t2.tjny
+        order by t1.day asc
     </select>
 
     <select id="getRegisterCountByMonth" parameterType="com.tao.yeblog.model.qo.RegisterChartsQO"
             resultType="com.tao.yeblog.model.dto.RegisterChartsDTO">
-        select count(*) value,
-        DATE_FORMAT(t.regtime,'%Y年%m月') tjny
-        from blog_user t
-        where 1=1
-        and DATE_FORMAT(t.regtime,'%Y-%m') in
-        <foreach collection="tjnys" item="tjny" open="(" close=")" separator=",">
-            #{tjny}
-        </foreach>
-        group by DATE_FORMAT(regtime,'%Y-%m');
+        select t1.day tjny,
+        ifnull(t2.value, 0) value
+        from
+        (
+            select DATE_FORMAT(@cdate := DATE_ADD(@cdate, INTERVAL -1 month), '%Y年%m月') day
+            from
+            (
+                select @cdate := DATE_ADD(sysdate(), INTERVAL+ 1 month)
+                from blog_user
+            ) t0
+            limit 6
+        ) t1
+        left join
+        (
+            select count(*) value,
+            DATE_FORMAT(t.regtime, '%Y年%m月') tjny
+            from blog_user t
+            where 1= 1
+            <if test=" tjnyq != null and tjnyq != ''">
+                and DATE_FORMAT(t.regtime,'%Y%m') >= #{tjnyq}
+            </if>
+            <if test=" tjnyz != null and tjnyz != ''">
+                and DATE_FORMAT(t.regtime,'%Y%m') &lt;= #{tjnyz}
+            </if>
+            group by DATE_FORMAT(regtime, '%Y%m')
+        ) t2 on t1.day= t2.tjny
+        order by t1.day asc
     </select>
 
     <select id="getRegisterCountByDay" parameterType="com.tao.yeblog.model.qo.RegisterChartsQO"
             resultType="com.tao.yeblog.model.dto.RegisterChartsDTO">
-        select count(*) value,
-        DATE_FORMAT(t.regtime,'%Y年%m月%d日') tjny
-        from blog_user t
-        where 1=1
-        and DATE_FORMAT(t.regtime,'%Y-%m-%d') in
-        <foreach collection="tjnys" item="tjny" open="(" close=")" separator=",">
-            #{tjny}
-        </foreach>
-        group by DATE_FORMAT(regtime,'%Y-%m-%d');
+        select t1.day tjny,
+        ifnull(t2.value, 0) value
+        from
+        (
+            select DATE_FORMAT(@cdate := DATE_ADD(@cdate, INTERVAL -1 day), '%Y年%m月%d日') day
+            from
+            (
+                select @cdate := DATE_ADD(sysdate(), INTERVAL+ 1 day)
+                from blog_user
+            ) t0
+            limit 15
+        ) t1
+        left join
+        (
+            select count(*) value,
+            DATE_FORMAT(t.regtime, '%Y年%m月%d日') tjny
+            from blog_user t
+            where 1= 1
+            <if test=" tjnyq != null and tjnyq != ''">
+                and DATE_FORMAT(t.regtime,'%Y%m%d') >= #{tjnyq}
+            </if>
+            <if test=" tjnyz != null and tjnyz != ''">
+                and DATE_FORMAT(t.regtime,'%Y%m%d') &lt;= #{tjnyz}
+            </if>
+            group by DATE_FORMAT(regtime, '%Y%m%d')
+        ) t2 on t1.day= t2.tjny
+        order by t1.day asc
     </select>
 </mapper>
