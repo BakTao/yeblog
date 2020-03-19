@@ -1,6 +1,6 @@
 package com.tao.yeblog.dao;
 
-import com.tao.yeblog.common.IPage;
+import com.github.pagehelper.Page;
 import com.tao.yeblog.model.dto.UserDTO;
 import com.tao.yeblog.model.qo.UserQO;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,5 +16,6 @@ public interface UserMapper {
      * @param userQO
      * @return
      */
-    IPage<UserDTO> pageUserInfo(UserQO userQO);
+    Page<UserDTO> pageUserInfo(UserQO userQO);
+
 }

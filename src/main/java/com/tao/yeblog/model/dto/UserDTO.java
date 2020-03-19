@@ -12,6 +12,8 @@ public class UserDTO {
 
     private String loginId; //登录Id
 
+    private String password; //密码
+
     private String sex;     //性别
 
     private String phone;   //手机号码
@@ -31,5 +33,12 @@ public class UserDTO {
     private String reason; //失效原因
 
     private String blogCount; //博客数量
+
+    private String ownBlogCount; //原创博客数量
+
+    private String noOwnBlogCount; //转载博客数量
+
+    private String testBlogCount; //草稿博客数量
+
 
 }
