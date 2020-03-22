@@ -40,4 +40,10 @@ public class UserService implements IUserService {
 
         return page;
     }
+
+    @Override
+    public String updateUserInfo(UserDTO userDTO) {
+        userMapper.updateUserInfo(userDTO);
+        return "success";
+    }
 }

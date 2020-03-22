@@ -18,4 +18,11 @@ public interface UserMapper {
      */
     Page<UserDTO> pageUserInfo(UserQO userQO);
 
+    /**
+     * 更新用户信息
+     * @param userDTO
+     * @return
+     */
+    void updateUserInfo(UserDTO userDTO);
+
 }

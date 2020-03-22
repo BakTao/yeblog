@@ -27,8 +27,18 @@ public class UserController {
      * @return
      */
     @PostMapping("/pageUserInfo")
-    public Response<IPage<UserDTO>> pageUserInfo(@RequestBody  UserQO userQO){
+    public Response<IPage<UserDTO>> pageUserInfo(@RequestBody UserQO userQO){
         return Response.successData(userService.pageUserInfo(userQO));
+    }
+
+    /**
+     * 更新用户信息
+     * @param userDTO
+     * @return
+     */
+    @PostMapping("/updateUserInfo")
+    public Response<String> updateUserInfo(@RequestBody UserDTO userDTO){
+        return Response.successData(userService.updateUserInfo(userDTO));
     }
 
 }

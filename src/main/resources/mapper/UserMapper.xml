@@ -4,6 +4,8 @@
 
     <select id="pageUserInfo" parameterType="com.tao.yeblog.model.qo.UserQO"
             resultType="com.tao.yeblog.model.dto.UserDTO">
+      select * from
+      (
       select t1.name name,
       t1.sex sex,
       t1.loginid loginId,
@@ -26,19 +28,96 @@
       left join (select * from blog where `type` = '1') t4 on t2.id = t4.id
       left join (select * from blog where `type` = '2') t5 on t2.id = t5.id
       group by t1.id
+      ) t
+      where 1=1
+      <if test="name !=null and name != ''">
+        and t.name like(concat('%',#{name},'%'))
+      </if>
+      <if test="loginId !=null and loginId != ''">
+        and t.loginid like(concat('%',#{loginId},'%'))
+      </if>
+      <if test="sex !=null and sex != ''">
+        and t.sex = #{sex}
+      </if>
+      <if test="enable !=null and enable != ''">
+        and t.enable = #{enable}
+      </if>
+      <if test="phone !=null and phone != ''">
+        and t.phone like(concat('%',#{phone},'%'))
+      </if>
+      <if test="email !=null and email != ''">
+        and t.email like(concat('%',#{email},'%'))
+      </if>
+      <if test="regTimeQ !=null and regTimeQ != ''">
+        and t.regTime >= date_format(#{regTimeQ},'%Y-%m-%d')
+      </if>
+      <if test="regTimeZ !=null and regTimeZ != ''">
+        and t.regTime &lt;= date_format(#{regTimeZ},'%Y-%m-%d')
+      </if>
+      <choose>
+        <when test="blogType !=null and blogType != ''">
+            <choose>
+              <when test="blogType == '0'.toString()">
+                <if test="blogCountQ != null and blogCountQ != ''">
+                  and t.ownBlogCount >= #{blogCountQ}
+                </if>
+                <if test="blogCountZ != null and blogCountZ != ''">
+                  and t.ownBlogCount &lt;= #{blogCountZ}
+                </if>
+              </when>
+              <when test="blogType == '1'.toString()">
+                <if test="blogCountQ != null and blogCountQ != ''">
+                  and t.noOwnBlogCount >= #{blogCountQ}
+                </if>
+                <if test="blogCountZ != null and blogCountZ != ''">
+                  and t.noOwnBlogCount &lt;= #{blogCountZ}
+                </if>
+              </when>
+              <when test="blogType == '2'.toString()">
+                <if test="blogCountQ != null and blogCountQ != ''">
+                  and t.testBlogCount >= #{blogCountQ}
+                </if>
+                <if test="blogCountZ != null and blogCountZ != ''">
+                  and t.testBlogCount &lt;= #{blogCountZ}
+                </if>
+              </when>
+              <when test="blogType == '3'.toString()">
+                <if test="blogCountQ != null and blogCountQ != ''">
+                  and t.ownBlogCount + t.noOwnBlogCount >= #{blogCountQ}
+                </if>
+                <if test="blogCountZ != null and blogCountZ != ''">
+                  and t.ownBlogCount + t.noOwnBlogCount &lt;= #{blogCountZ}
+                </if>
+              </when>
+            </choose>
+        </when>
+        <otherwise>
+          <if test="blogCountQ != null and blogCountQ != ''">
+              and t.blogCount >= #{blogCountQ}
+          </if>
+          <if test="blogCountZ != null and blogCountZ != ''">
+            and t.blogCount &lt;= #{blogCountZ}
+          </if>
+        </otherwise>
+      </choose>
     </select>
 
     <update id="updateUserInfo" parameterType="com.tao.yeblog.model.dto.UserDTO">
       update blog_user t
       <set>
         <if test="enable != null and enable != ''">
-          t.enable = #{enable}
+          t.enable = #{enable},
+        </if>
+        <if test="reason != null">
+          t.reason = #{reason},
         </if>
       </set>
-      where 1=1
-      <if test="loginId != null and loginId != ''">
-        t.loginid = #{loginId}
-      </if>
+      <where>
+        <if test="loginId != null and loginId != ''">
+          and t.loginid = #{loginId}
+        </if>
+      </where>
+
     </update>
 
 </mapper>

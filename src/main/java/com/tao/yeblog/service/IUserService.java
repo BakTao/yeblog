@@ -16,4 +16,10 @@ public interface IUserService {
      */
     IPage<UserDTO> pageUserInfo(UserQO userQO);
 
+    /**
+     * 更新用户信息
+     * @param userDTO
+     * @return
+     */
+    String updateUserInfo(UserDTO userDTO);
 }
