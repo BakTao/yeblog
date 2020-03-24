@@ -12,6 +12,14 @@
       group by t1.columnid.t1.name
     </select>
 
+    <select id="listColumnInfo" parameterType="com.tao.yeblog.model.qo.ColumnQO"
+            resultType="com.tao.yeblog.model.dto.SelectDTO">
+      select t1.columnid value,
+      t1.name name
+      from yeblog_db.column t1
+      order by t1.columnid
+    </select>
+
     <insert id="createColumnInfo" parameterType="com.tao.yeblog.model.dto.ColumnDTO">
       insert into blog
       (id,

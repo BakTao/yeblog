@@ -20,5 +20,5 @@ public interface IBlogService {
      * 更新用户信息
      * @param blogDTO
      */
-    void updateBlogInfo(BlogDTO blogDTO);
+    String updateBlogInfo(BlogDTO blogDTO);
 }

@@ -2,8 +2,11 @@ package com.tao.yeblog.dao;
 
 import com.tao.yeblog.common.IPage;
 import com.tao.yeblog.model.dto.ColumnDTO;
+import com.tao.yeblog.model.dto.SelectDTO;
 import com.tao.yeblog.model.qo.ColumnQO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 专栏管理Mapper
@@ -12,11 +15,18 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ColumnMapper {
 
     /**
-     * 获取专栏信息
+     * 获取专栏信息(分页)
      * @param columnQO
      * @return
      */
     IPage<ColumnDTO> pageColumnInfo(ColumnQO columnQO);
+
+    /**
+     * 获取专栏信息
+     * @param columnQO
+     * @return
+     */
+    List<SelectDTO> listColumnInfo(ColumnQO columnQO);
 
     /**
      * 增加专栏信息

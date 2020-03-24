@@ -1,6 +1,6 @@
 package com.tao.yeblog.dao;
 
-import com.tao.yeblog.common.IPage;
+import com.github.pagehelper.Page;
 import com.tao.yeblog.model.dto.BlogDTO;
 import com.tao.yeblog.model.qo.BlogQO;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +16,7 @@ public interface BlogMapper {
      * @param blogQO
      * @return
      */
-    IPage<BlogDTO> pageBlogInfo(BlogQO blogQO);
+    Page<BlogDTO> pageBlogInfo(BlogQO blogQO);
 
     /**
      * 更新博客信息
