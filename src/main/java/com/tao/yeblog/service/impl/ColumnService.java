@@ -1,6 +1,10 @@
 package com.tao.yeblog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tao.yeblog.common.IPage;
+import com.tao.yeblog.common.PageDefaultImpl;
+import com.tao.yeblog.common.Pager;
 import com.tao.yeblog.dao.ColumnMapper;
 import com.tao.yeblog.model.dto.ColumnDTO;
 import com.tao.yeblog.model.dto.SelectDTO;
@@ -9,6 +13,8 @@ import com.tao.yeblog.service.IColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,11 +25,49 @@ public class ColumnService implements IColumnService {
 
     @Override
     public IPage<ColumnDTO> pageColumnInfo(ColumnQO columnQO) {
-        return columnMapper.pageColumnInfo(columnQO);
+        PageDefaultImpl<ColumnDTO> page = new PageDefaultImpl<>();
+
+        PageHelper.startPage(columnQO.getPageIndex(),columnQO.getPageSize());
+        PageInfo<ColumnDTO> pageInfo = new PageInfo<>(columnMapper.pageColumnInfo(columnQO));
+
+        Pager pager = new Pager();
+        pager.setPageIndex(pageInfo.getPageNum());
+        pager.setPageSize(pageInfo.getPageSize());
+        pager.setPageCount(pageInfo.getPages());
+        pager.setRecordCount(pageInfo.getTotal());
+        pager.setPrePageIndex(pageInfo.getPrePage());
+        pager.setNextPageIndex(pageInfo.getNextPage());
+        pager.setExistsPrePage(pageInfo.isHasPreviousPage());
+        pager.setExistsNextPage(pageInfo.isHasNextPage());
+
+        page.setPager(pager);
+        page.setData(pageInfo.getList());
+
+        return page;
     }
 
     @Override
     public List<SelectDTO> listColumnInfo(ColumnQO columnQO) {
         return columnMapper.listColumnInfo(columnQO);
+    }
+
+    @Override
+    public String createColumn(ColumnDTO columnDTO) {
+        String columnId = 'c' + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+        columnDTO.setColumnId(columnId);
+        columnMapper.createColumn(columnDTO);
+        return "success";
+    }
+
+    @Override
+    public String updateColumnInfo(ColumnDTO columnDTO) {
+        columnMapper.updateColumnInfo(columnDTO);
+        return "success";
+    }
+
+    @Override
+    public String deleteColumn(ColumnDTO columnDTO) {
+        columnMapper.deleteColumn(columnDTO);
+        return "success";
     }
 }

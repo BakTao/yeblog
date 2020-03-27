@@ -16,6 +16,8 @@ public class BlogDTO {
 
     private String columnId; //专栏id
 
+    private String newColumnId; //专栏id
+
     private String columnName; //专栏名称
 
     private String title;   //标题

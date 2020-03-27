@@ -32,6 +32,8 @@ public class UserDTO {
 
     private String reason; //失效原因
 
+    private String blogCountHj; //博客数量(合计)
+
     private String blogCount; //博客数量
 
     private String ownBlogCount; //原创博客数量

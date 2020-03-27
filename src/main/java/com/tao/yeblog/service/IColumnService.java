@@ -26,4 +26,24 @@ public interface IColumnService {
      */
     List<SelectDTO> listColumnInfo(ColumnQO columnQO);
 
+    /**
+     * 增加专栏信息
+     * @param columnDTO
+     * @return
+     */
+    String createColumn(ColumnDTO columnDTO);
+
+    /**
+     * 更新专栏信息
+     * @param columnDTO
+     * @return
+     */
+    String updateColumnInfo(ColumnDTO columnDTO);
+
+    /**
+     * 删除专栏信息
+     * @param columnDTO
+     * @return
+     */
+    String deleteColumn(ColumnDTO columnDTO);
 }

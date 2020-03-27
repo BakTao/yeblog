@@ -43,4 +43,37 @@ public class ColumnController {
     public Response<List<SelectDTO>> listColumnInfo(@RequestBody ColumnQO columnQO){
         return Response.successData(columnService.listColumnInfo(columnQO));
     }
+
+    /**
+     * 新增专栏信息
+     * @param columnDTO
+     * @return
+     */
+    @PostMapping("/createColumn")
+    public Response<String> createColumn(@RequestBody ColumnDTO columnDTO){
+        return Response.successData(columnService.createColumn(columnDTO));
+    }
+
+    /**
+     * 更新专栏信息
+     * @param columnDTO
+     * @return
+     */
+    @PostMapping("/updateColumnInfo")
+    public Response<String> updateColumnInfo(@RequestBody ColumnDTO columnDTO){
+        return Response.successData(columnService.updateColumnInfo(columnDTO));
+    }
+
+    /**
+     * 删除专栏信息
+     * @param columnDTO
+     * @return
+     */
+    @PostMapping("/deleteColumn")
+    public Response deleteColumn(@RequestBody ColumnDTO columnDTO){
+        if(columnDTO.getColumnId() == null || "".equals(columnDTO.getColumnId())){
+            return new Response<>("001","专栏ID不能为空");
+        }
+        return Response.successData(columnService.deleteColumn(columnDTO));
+    }
 }

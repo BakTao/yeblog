@@ -1,6 +1,6 @@
 package com.tao.yeblog.dao;
 
-import com.tao.yeblog.common.IPage;
+import com.github.pagehelper.Page;
 import com.tao.yeblog.model.dto.ColumnDTO;
 import com.tao.yeblog.model.dto.SelectDTO;
 import com.tao.yeblog.model.qo.ColumnQO;
@@ -19,7 +19,7 @@ public interface ColumnMapper {
      * @param columnQO
      * @return
      */
-    IPage<ColumnDTO> pageColumnInfo(ColumnQO columnQO);
+    Page<ColumnDTO> pageColumnInfo(ColumnQO columnQO);
 
     /**
      * 获取专栏信息
@@ -33,6 +33,19 @@ public interface ColumnMapper {
      * @param columnDTO
      * @return
      */
-    void createColumnInfo(ColumnDTO columnDTO);
+    void createColumn(ColumnDTO columnDTO);
 
+    /**
+     * 更新专栏信息
+     * @param columnDTO
+     * @return
+     */
+    void updateColumnInfo(ColumnDTO columnDTO);
+
+    /**
+     * 删除专栏信息
+     * @param columnDTO
+     * @return
+     */
+    void deleteColumn(ColumnDTO columnDTO);
 }
