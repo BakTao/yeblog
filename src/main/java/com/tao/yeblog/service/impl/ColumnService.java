@@ -52,6 +52,11 @@ public class ColumnService implements IColumnService {
     }
 
     @Override
+    public List<SelectDTO> listColumnInfoAll(ColumnQO columnQO) {
+        return columnMapper.listColumnInfoAll(columnQO);
+    }
+
+    @Override
     public String createColumn(ColumnDTO columnDTO) {
         String columnId = 'c' + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
         columnDTO.setColumnId(columnId);

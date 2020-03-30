@@ -80,6 +80,21 @@
       order by t1.columnid
     </select>
 
+    <select id="listColumnInfoAll" parameterType="com.tao.yeblog.model.qo.ColumnQO"
+                resultType="com.tao.yeblog.model.dto.SelectDTO">
+      select "0" value,
+             "全部" name
+      from yeblog_db.column
+      union
+      select *
+      from
+      (
+        select t1.columnid value, t1.name name
+        from yeblog_db.column t1
+        order by t1.columnid
+      ) t
+    </select>
+
     <insert id="createColumn" parameterType="com.tao.yeblog.model.dto.ColumnDTO">
       insert into yeblog_db.column
       (

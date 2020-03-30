@@ -27,6 +27,13 @@ public interface IColumnService {
     List<SelectDTO> listColumnInfo(ColumnQO columnQO);
 
     /**
+     * 获取专栏信息(包含全部)
+     * @param columnQO
+     * @return
+     */
+    List<SelectDTO> listColumnInfoAll(ColumnQO columnQO);
+
+    /**
      * 增加专栏信息
      * @param columnDTO
      * @return

@@ -45,6 +45,16 @@ public class ColumnController {
     }
 
     /**
+     * 获取专栏信息(包含全部)
+     * @param columnQO
+     * @return
+     */
+    @PostMapping("/listColumnInfoAll")
+    public Response<List<SelectDTO>> listColumnInfoAll(@RequestBody ColumnQO columnQO){
+        return Response.successData(columnService.listColumnInfoAll(columnQO));
+    }
+
+    /**
      * 新增专栏信息
      * @param columnDTO
      * @return
