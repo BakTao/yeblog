@@ -1,8 +1,11 @@
 package com.tao.yeblog.service;
 
 import com.tao.yeblog.common.IPage;
+import com.tao.yeblog.model.dto.SelectDTO;
 import com.tao.yeblog.model.dto.ShopDTO;
 import com.tao.yeblog.model.qo.ShopQO;
+
+import java.util.List;
 
 /**
  * 商城管理Service
@@ -15,4 +18,39 @@ public interface IShopService {
      * @return
      */
     IPage<ShopDTO> pageShopInfo(ShopQO shopQO);
+
+    /**
+     * 增加商品
+     * @param shopDTO
+     * @return
+     */
+    String createShop(ShopDTO shopDTO);
+
+    /**
+     * 更新商品信息
+     * @param shopDTO
+     * @return
+     */
+    String updateShopInfo(ShopDTO shopDTO);
+
+    /**
+     * 获取类别信息
+     * @param
+     * @return
+     */
+    List<SelectDTO> listCategoryInfo();
+
+    /**
+     * 增加类别
+     * @param shopDTO
+     * @return
+     */
+    String createCategory(ShopDTO shopDTO);
+
+    /**
+     * 删除类别
+     * @param shopDTO
+     * @return
+     */
+    String deleteCategory(ShopDTO shopDTO);
 }

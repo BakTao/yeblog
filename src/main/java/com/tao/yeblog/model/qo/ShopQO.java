@@ -9,21 +9,28 @@ import lombok.Data;
 @Data
 public class ShopQO extends BasePage {
 
-    private String name;    //名字
+    private String goodsName;    //名字
 
     private String goodsId; //商品Id
 
-    private String nums;     //数量
+    private String numsQ;     //数量起
 
-    private String buyNums;     //购买数量
+    private String buyNumsQ;     //购买数量起
 
-    private String price;   //价格
+    private String numsZ;     //数量止
 
-    private String photo;   //图片
+    private String buyNumsZ;     //购买数量止
+
+    private String priceQ;   //价格起
+
+    private String priceZ;   //价格止
 
     private String type;   //类型
 
-    private String content;   //商品介绍
+    private String enable;   //生效
 
+    private String categoryId;  //类别ID
+
+    private String[] categoryIds;  //类别ID数组
 
 }

@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class ShopDTO {
 
-    private String name;    //名字
+    private String goodsName;    //名字
 
     private String goodsId; //商品Id
 
@@ -23,5 +23,18 @@ public class ShopDTO {
     private String type;   //类型
 
     private String content;   //商品介绍
+
+    private String categoryId;  //类别ID
+
+    private String[] categoryIds;  //类别ID数组
+
+    private String categoryName;    //类别名称
+
+    private String bookFile;    //电子物品链接
+
+    private String bookFileName;    //电子物品名称
+
+    private String enable;  //是否生效
+
 
 }

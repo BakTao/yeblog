@@ -1,12 +1,21 @@
 package com.tao.yeblog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tao.yeblog.common.IPage;
+import com.tao.yeblog.common.PageDefaultImpl;
+import com.tao.yeblog.common.Pager;
 import com.tao.yeblog.dao.ShopMapper;
+import com.tao.yeblog.model.dto.SelectDTO;
 import com.tao.yeblog.model.dto.ShopDTO;
 import com.tao.yeblog.model.qo.ShopQO;
 import com.tao.yeblog.service.IShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ShopService implements IShopService {
@@ -16,6 +25,65 @@ public class ShopService implements IShopService {
 
     @Override
     public IPage<ShopDTO> pageShopInfo(ShopQO shopQO) {
-        return shopMapper.pageShopInfo(shopQO);
+
+        if(shopQO.getCategoryId() != null && !"".equals(shopQO.getCategoryId())){
+            shopQO.setCategoryIds(shopQO.getCategoryId().split(","));
+        }
+        PageDefaultImpl<ShopDTO> page = new PageDefaultImpl<>();
+
+        PageHelper.startPage(shopQO.getPageIndex(),shopQO.getPageSize());
+        PageInfo<ShopDTO> pageInfo = new PageInfo<>(shopMapper.pageShopInfo(shopQO));
+
+        Pager pager = new Pager();
+        pager.setPageIndex(pageInfo.getPageNum());
+        pager.setPageSize(pageInfo.getPageSize());
+        pager.setPageCount(pageInfo.getPages());
+        pager.setRecordCount(pageInfo.getTotal());
+        pager.setPrePageIndex(pageInfo.getPrePage());
+        pager.setNextPageIndex(pageInfo.getNextPage());
+        pager.setExistsPrePage(pageInfo.isHasPreviousPage());
+        pager.setExistsNextPage(pageInfo.isHasNextPage());
+
+        page.setPager(pager);
+        page.setData(pageInfo.getList());
+
+        return page;
+    }
+
+    @Override
+    public String createShop(ShopDTO shopDTO) {
+        String goodsId = "g" + shopDTO.getType() +  new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+        shopDTO.setGoodsId(goodsId);
+        shopMapper.createShop(shopDTO);
+        return "success";
+    }
+
+    @Override
+    public String updateShopInfo(ShopDTO shopDTO) {
+        shopMapper.updateShopInfo(shopDTO);
+        return "success";
+    }
+
+    @Override
+    public List<SelectDTO> listCategoryInfo() {
+        return shopMapper.listCategoryInfo();
+    }
+
+    @Override
+    public String createCategory(ShopDTO shopDTO) {
+        String categoryId = "cg" + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+        shopDTO.setCategoryId(categoryId);
+        shopMapper.createCategory(shopDTO);
+        return "success";
+    }
+
+    @Override
+    public String deleteCategory(ShopDTO shopDTO) {
+        if(shopDTO.getCategoryId() != null && !"".equals(shopDTO.getCategoryId())){
+            shopDTO.setCategoryIds(shopDTO.getCategoryId().split(","));
+        }
+
+        shopMapper.deleteCategory(shopDTO);
+        return "success";
     }
 }
