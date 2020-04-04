@@ -7,8 +7,11 @@ import com.tao.yeblog.model.qo.OrderQO;
 import com.tao.yeblog.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 订单管理Controller
@@ -26,7 +29,47 @@ public class OrderController {
      * @return
      */
     @PostMapping("/pageOrderInfo")
-    public Response<IPage<OrderDTO>> pageOrderInfo(OrderQO orderQO){
+    public Response<IPage<OrderDTO>> pageOrderInfo(@RequestBody OrderQO orderQO){
         return Response.successData(orderService.pageOrderInfo(orderQO));
+    }
+
+    /**
+     * 获取订单商品信息
+     * @param orderQO
+     * @return
+     */
+    @PostMapping("/listOrderShopInfo")
+    public Response<List<OrderDTO>> listOrderShopInfo(@RequestBody OrderQO orderQO){
+        return Response.successData(orderService.listOrderShopInfo(orderQO));
+    }
+
+    /**
+     * 获取订单商品金额(分页)
+     * @param orderQO
+     * @return
+     */
+    @PostMapping("/pageOrderMoney")
+    public Response<IPage<OrderDTO>> pageOrderMoney(@RequestBody OrderQO orderQO){
+        return Response.successData(orderService.pageOrderMoney(orderQO));
+    }
+
+    /**
+     * 获取订单商品金额
+     * @param orderQO
+     * @return
+     */
+    @PostMapping("/listOrderMoney")
+    public Response<List<OrderDTO>> listOrderMoney(@RequestBody OrderQO orderQO){
+        return Response.successData(orderService.listOrderMoney(orderQO));
+    }
+
+    /**
+     * 获取订单信息
+     * @param orderDTO
+     * @return
+     */
+    @PostMapping("/updateOrderInfo")
+    public Response<String> updateOrderInfo(@RequestBody OrderDTO orderDTO){
+        return Response.successData(orderService.updateOrderInfo(orderDTO));
     }
 }

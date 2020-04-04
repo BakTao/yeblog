@@ -1,10 +1,13 @@
 package com.tao.yeblog.service.impl;
 
 import com.tao.yeblog.dao.BlogTotalMapper;
+import com.tao.yeblog.dao.OrderTotalMapper;
 import com.tao.yeblog.dao.RegisterTotalMapper;
 import com.tao.yeblog.model.dto.BlogChartsDTO;
+import com.tao.yeblog.model.dto.OrderChartsDTO;
 import com.tao.yeblog.model.dto.RegisterChartsDTO;
 import com.tao.yeblog.model.qo.BlogChartsQO;
+import com.tao.yeblog.model.qo.OrderChartsQO;
 import com.tao.yeblog.model.qo.RegisterChartsQO;
 import com.tao.yeblog.service.IDataTotalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class DataTotalService implements IDataTotalService {
 
     @Autowired
     private BlogTotalMapper blogTotalMapper;
+
+    @Autowired
+    private OrderTotalMapper orderTotalMapper;
 
     @Override
     public List<RegisterChartsDTO> getRegisterCount(RegisterChartsQO registerChartsQO) {
@@ -64,5 +70,27 @@ public class DataTotalService implements IDataTotalService {
         }
         return blogTotalMapper.getBlogCountByColumn(blogChartsQO);
 
+    }
+
+    @Override
+    public List<OrderChartsDTO> getOrderCount(OrderChartsQO orderChartsQO) {
+        if("1".equals(orderChartsQO.getSjwd())){
+            return orderTotalMapper.getOrderCountByYear();
+        }else if("2".equals(orderChartsQO.getSjwd())){
+            return orderTotalMapper.getOrderCountByMonth();
+        }else{
+            return orderTotalMapper.getOrderCountByDay();
+        }
+    }
+
+    @Override
+    public List<OrderChartsDTO> getOrderMoney(OrderChartsQO orderChartsQO) {
+        if("1".equals(orderChartsQO.getSjwd())){
+            return orderTotalMapper.getOrderMoneyByYear();
+        }else if("2".equals(orderChartsQO.getSjwd())){
+            return orderTotalMapper.getOrderMoneyByMonth();
+        }else{
+            return orderTotalMapper.getOrderMoneyByDay();
+        }
     }
 }

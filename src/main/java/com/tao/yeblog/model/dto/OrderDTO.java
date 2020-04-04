@@ -12,9 +12,7 @@ public class OrderDTO {
 
     private String userId;    //购买人id
 
-    private String userName;    //购买人名称
-
-    private String price;       //总价格
+    private String price;       //价格
 
     private String enable;     //是否有效
 
@@ -22,6 +20,19 @@ public class OrderDTO {
 
     private String address;   //地址
 
+    private String userPhone;   //手机
+
     private String remark;   //备注
+
+    private String expressId;   //物流id
+
+    private String goodsId;     //商品id
+
+    private String goodsName;     //商品名称
+
+    private String nums;     //商品数量
+
+    private String priceCount;     //订单总价
+
 
 }

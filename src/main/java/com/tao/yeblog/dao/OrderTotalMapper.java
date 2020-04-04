@@ -1,7 +1,6 @@
 package com.tao.yeblog.dao;
 
 import com.tao.yeblog.model.dto.OrderChartsDTO;
-import com.tao.yeblog.model.qo.OrderChartsQO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,22 +13,43 @@ public interface OrderTotalMapper {
 
     /**
      * 通过年获取订单量
-     * @param orderChartsQO
+     * @param
      * @return
      */
-    List<OrderChartsDTO> getOrderCountByYear(OrderChartsQO orderChartsQO);
+    List<OrderChartsDTO> getOrderCountByYear();
 
     /**
      * 通过月获取订单量
-     * @param orderChartsQO
+     * @param
      * @return
      */
-    List<OrderChartsDTO> getOrderCountByMonth(OrderChartsQO orderChartsQO);
+    List<OrderChartsDTO> getOrderCountByMonth();
 
     /**
      * 通过天获取订单量
-     * @param orderChartsQO
+     * @param
      * @return
      */
-    List<OrderChartsDTO> getOrderCountByDay(OrderChartsQO orderChartsQO);
+    List<OrderChartsDTO> getOrderCountByDay();
+
+    /**
+     * 通过年获取订单金额
+     * @param
+     * @return
+     */
+    List<OrderChartsDTO> getOrderMoneyByYear();
+
+    /**
+     * 通过月获取订单金额
+     * @param
+     * @return
+     */
+    List<OrderChartsDTO> getOrderMoneyByMonth();
+
+    /**
+     * 通过天获取订单金额
+     * @param
+     * @return
+     */
+    List<OrderChartsDTO> getOrderMoneyByDay();
 }

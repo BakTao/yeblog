@@ -13,11 +13,15 @@ public class OrderQO extends BasePage {
 
     private String userId;    //购买人id
 
-    private String price;       //总价格
+    private String priceQ;       //总价格起
+
+    private String priceZ;       //总价格止
 
     private String enable;     //是否有效
 
-    private String createTime;   //创建时间
+    private String createTimeQ;   //创建时间起
+
+    private String createTimeZ;   //创建时间止
 
     private String address;   //地址
 

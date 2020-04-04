@@ -2,8 +2,10 @@ package com.tao.yeblog.rest;
 
 import com.tao.yeblog.common.Response;
 import com.tao.yeblog.model.dto.BlogChartsDTO;
+import com.tao.yeblog.model.dto.OrderChartsDTO;
 import com.tao.yeblog.model.dto.RegisterChartsDTO;
 import com.tao.yeblog.model.qo.BlogChartsQO;
+import com.tao.yeblog.model.qo.OrderChartsQO;
 import com.tao.yeblog.model.qo.RegisterChartsQO;
 import com.tao.yeblog.service.IDataTotalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +64,25 @@ public class DataTotalContorller {
     @PostMapping("/getBlogCountByColumn")
     public Response<List<BlogChartsDTO>> getBlogCountByColumn(@RequestBody BlogChartsQO blogChartsQO){
         return Response.successData(dataTotalService.getBlogCountByColumn(blogChartsQO));
+    }
+
+    /**
+     * 获取订单量
+     * @param orderChartsQO
+     * @return
+     */
+    @PostMapping("/getOrderCount")
+    public Response<List<OrderChartsDTO>> getOrderCount(@RequestBody OrderChartsQO orderChartsQO){
+        return Response.successData(dataTotalService.getOrderCount(orderChartsQO));
+    }
+
+    /**
+     * 获取订单金额
+     * @param orderChartsQO
+     * @return
+     */
+    @PostMapping("/getOrderMoney")
+    public Response<List<OrderChartsDTO>> getOrderMoney(@RequestBody OrderChartsQO orderChartsQO){
+        return Response.successData(dataTotalService.getOrderMoney(orderChartsQO));
     }
 }

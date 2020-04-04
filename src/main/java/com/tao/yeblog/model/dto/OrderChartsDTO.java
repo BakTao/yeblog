@@ -17,4 +17,6 @@ public class OrderChartsDTO {
     private String tjny;    //统计年月
 
     private String value;   //值
+
+    private String type;   //类型
 }

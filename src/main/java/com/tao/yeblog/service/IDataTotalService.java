@@ -1,8 +1,10 @@
 package com.tao.yeblog.service;
 
 import com.tao.yeblog.model.dto.BlogChartsDTO;
+import com.tao.yeblog.model.dto.OrderChartsDTO;
 import com.tao.yeblog.model.dto.RegisterChartsDTO;
 import com.tao.yeblog.model.qo.BlogChartsQO;
+import com.tao.yeblog.model.qo.OrderChartsQO;
 import com.tao.yeblog.model.qo.RegisterChartsQO;
 
 import java.util.List;
@@ -39,4 +41,18 @@ public interface IDataTotalService {
      * @return
      */
     List<BlogChartsDTO> getBlogCountByColumn(BlogChartsQO blogChartsQO);
+
+    /**
+     * 获取订单量
+     * @param orderChartsQO
+     * @return
+     */
+    List<OrderChartsDTO> getOrderCount(OrderChartsQO orderChartsQO);
+
+    /**
+     * 获取订单金额
+     * @param orderChartsQO
+     * @return
+     */
+    List<OrderChartsDTO> getOrderMoney(OrderChartsQO orderChartsQO);
 }
