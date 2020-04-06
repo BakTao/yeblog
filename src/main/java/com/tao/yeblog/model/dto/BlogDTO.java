@@ -30,7 +30,7 @@ public class BlogDTO {
 
     private String enable; //是否有效
 
-    private String createTime; //是否有效
+    private String createTime; //创建时间
 
     private String reason; //原因
 
