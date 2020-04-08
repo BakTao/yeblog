@@ -33,8 +33,10 @@ public class DataTotalService implements IDataTotalService {
             return registerTotalMapper.getRegisterCountByYear(registerChartsQO);
         }else if("2".equals(registerChartsQO.getSjwd())){
             return registerTotalMapper.getRegisterCountByMonth(registerChartsQO);
-        }else{
+        }else if("3".equals(registerChartsQO.getSjwd())){
             return registerTotalMapper.getRegisterCountByDay(registerChartsQO);
+        }else{
+            return registerTotalMapper.getRegisterCountByWeek(registerChartsQO);
         }
     }
 
@@ -44,8 +46,10 @@ public class DataTotalService implements IDataTotalService {
             return blogTotalMapper.getBlogCountBylxByYear(blogChartsQO);
         }else if("2".equals(blogChartsQO.getSjwd())){
             return blogTotalMapper.getBlogCountBylxByMonth(blogChartsQO);
-        }else{
+        }else if("3".equals(blogChartsQO.getSjwd())){
             return blogTotalMapper.getBlogCountBylxByDay(blogChartsQO);
+        }else{
+            return blogTotalMapper.getBlogCountByWeek();
         }
     }
 
@@ -73,6 +77,12 @@ public class DataTotalService implements IDataTotalService {
     }
 
     @Override
+    public List<BlogChartsDTO> getBlogCountByOne() {
+        return blogTotalMapper.getBlogCountByOne();
+
+    }
+
+    @Override
     public List<OrderChartsDTO> getOrderCount(OrderChartsQO orderChartsQO) {
         if("1".equals(orderChartsQO.getSjwd())){
             return orderTotalMapper.getOrderCountByYear();
@@ -92,5 +102,11 @@ public class DataTotalService implements IDataTotalService {
         }else{
             return orderTotalMapper.getOrderMoneyByDay();
         }
+    }
+
+    @Override
+    public List<OrderChartsDTO> getOrderMoneyCountByOne() {
+        return orderTotalMapper.getOrderMoneyCountByOne();
+
     }
 }

@@ -34,4 +34,8 @@ public class BlogDTO {
 
     private String reason; //原因
 
+    private String collectionNums; //收藏数
+
+    private String praiseNums; //点赞数
+
 }

@@ -2,7 +2,8 @@ package com.tao.yeblog.rest;
 
 import com.tao.yeblog.common.Response;
 import com.tao.yeblog.model.dto.AdminUserDTO;
-import com.tao.yeblog.service.IAdminLoginService;
+import com.tao.yeblog.model.qo.AdminUserQO;
+import com.tao.yeblog.service.IAdminUserService;
 import com.tao.yeblog.utils.IpUtil;
 import com.tao.yeblog.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,18 @@ public class AmdinLoginController {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private IAdminLoginService adminLoginService;
+    private IAdminUserService adminUserService;
 
     /**
      * 登录接口
-     * @param adminUser
+     * @param adminUserQO
      * @param request
      * @return
      */
     @PostMapping("/adminLogin")
-    public Response<AdminUserDTO> login(@RequestBody AdminUserDTO adminUser, HttpServletRequest request){
+    public Response<AdminUserDTO> login(@RequestBody AdminUserQO adminUserQO, HttpServletRequest request){
         //通过用户名和密码获得用户信息
-        AdminUserDTO adminUserDTO = adminLoginService.getAdminUserInfo(adminUser);
+        AdminUserDTO adminUserDTO = adminUserService.getAdminUserInfo(adminUserQO);
 
         //用户名和密码错误
         if(adminUserDTO == null){
@@ -48,9 +49,9 @@ public class AmdinLoginController {
         AdminUserDTO updateInfo = new AdminUserDTO();
         updateInfo.setLogIp(ip);
         updateInfo.setLogTime("update");
-        updateInfo.setLoginId(adminUser.getLoginId());
-        updateInfo.setPassword(adminUser.getPassword());
-        adminLoginService.updateAdminUserInfo(updateInfo);
+        updateInfo.setLoginId(adminUserQO.getLoginId());
+        updateInfo.setPassword(adminUserQO.getPassword());
+        adminUserService.updateAdminUserInfo(updateInfo);
 
         //获取token
         String token = jwtUtil.getToken(adminUserDTO.getLoginId(), adminUserDTO.getName(), new HashMap<>());
@@ -60,11 +61,11 @@ public class AmdinLoginController {
     }
 
 
-    @RequestMapping("/test")
-    public Response<String> test(HttpServletRequest request){
-
-        return Response.successData(IpUtil.getIpAddr(request));
-    }
+//    @RequestMapping("/test")
+//    public Response<String> test(HttpServletRequest request){
+//
+//        return Response.successData(IpUtil.getIpAddr(request));
+//    }
 
 
 }

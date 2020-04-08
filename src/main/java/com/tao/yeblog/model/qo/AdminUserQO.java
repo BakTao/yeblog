@@ -1,23 +1,16 @@
-package com.tao.yeblog.model.dto;
+package com.tao.yeblog.model.qo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
- * 管理员信息DTO
+ * 管理员信息QO
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class AdminUserDTO {
+public class AdminUserQO{
+
     private String loginId;     //登录id
 
     private String password;    //密码
-
-    private String newPassword;    //新密码
 
     private String name;        //名称
 

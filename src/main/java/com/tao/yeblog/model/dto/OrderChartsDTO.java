@@ -19,4 +19,6 @@ public class OrderChartsDTO {
     private String value;   //值
 
     private String type;   //类型
+
+    private String price;   //价格
 }

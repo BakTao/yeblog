@@ -42,5 +42,8 @@ public class UserDTO {
 
     private String testBlogCount; //草稿博客数量
 
+    private String unableTime; //解禁时间
+
+    private String unableDay;   //封禁时间
 
 }

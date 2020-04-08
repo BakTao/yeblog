@@ -52,4 +52,11 @@ public interface OrderTotalMapper {
      * @return
      */
     List<OrderChartsDTO> getOrderMoneyByDay();
+
+    /**
+     * 通过一天获取订单金额
+     * @param
+     * @return
+     */
+    List<OrderChartsDTO> getOrderMoneyCountByOne();
 }

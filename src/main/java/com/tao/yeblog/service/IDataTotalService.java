@@ -43,6 +43,13 @@ public interface IDataTotalService {
     List<BlogChartsDTO> getBlogCountByColumn(BlogChartsQO blogChartsQO);
 
     /**
+     * 获取博客量(非草稿有效)
+     * @param
+     * @return
+     */
+    List<BlogChartsDTO> getBlogCountByOne();
+
+    /**
      * 获取订单量
      * @param orderChartsQO
      * @return
@@ -55,4 +62,11 @@ public interface IDataTotalService {
      * @return
      */
     List<OrderChartsDTO> getOrderMoney(OrderChartsQO orderChartsQO);
+
+    /**
+     * 获取订单金额
+     * @param
+     * @return
+     */
+    List<OrderChartsDTO> getOrderMoneyCountByOne();
 }

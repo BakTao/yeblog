@@ -67,6 +67,17 @@ public class DataTotalContorller {
     }
 
     /**
+     * 获取博客量(非草稿有效)
+     * @param
+     * @return
+     */
+    @PostMapping("/getBlogCountByOne")
+    public Response<List<BlogChartsDTO>> getBlogCountByOne(){
+        return Response.successData(dataTotalService.getBlogCountByOne());
+    }
+
+
+    /**
      * 获取订单量
      * @param orderChartsQO
      * @return
@@ -84,5 +95,15 @@ public class DataTotalContorller {
     @PostMapping("/getOrderMoney")
     public Response<List<OrderChartsDTO>> getOrderMoney(@RequestBody OrderChartsQO orderChartsQO){
         return Response.successData(dataTotalService.getOrderMoney(orderChartsQO));
+    }
+
+    /**
+     * 获取订单量金额(今日)
+     * @param
+     * @return
+     */
+    @PostMapping("/getOrderMoneyCountByOne")
+    public Response<List<OrderChartsDTO>> getOrderMoneyCountByOne(){
+        return Response.successData(dataTotalService.getOrderMoneyCountByOne());
     }
 }

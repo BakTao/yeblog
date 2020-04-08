@@ -32,4 +32,11 @@ public interface RegisterTotalMapper {
      * @return
      */
     List<RegisterChartsDTO> getRegisterCountByDay(RegisterChartsQO registerChartsQO);
+
+    /**
+     * 通过周获取注册量
+     * @param registerChartsQO
+     * @return
+     */
+    List<RegisterChartsDTO> getRegisterCountByWeek(RegisterChartsQO registerChartsQO);
 }

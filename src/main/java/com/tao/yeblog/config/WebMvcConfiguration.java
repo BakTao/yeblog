@@ -30,7 +30,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //登录请求不拦截
-        //registry.addInterceptor(getLoginInterceptor()).excludePathPatterns("/back/loginServices/adminLogin");
+        registry.addInterceptor(getLoginInterceptor()).excludePathPatterns("/back/loginServices/adminLogin");
     }
 
     protected class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -62,9 +62,9 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 return false;
             }
 
-            String userId = claims.getId();
+            //String userId = claims.getId();
 
-            System.out.println(userId);
+            //System.out.println(userId);
             return true;
         }
     }

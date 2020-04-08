@@ -94,4 +94,28 @@
         ) t2 on t1.day= t2.tjny
         order by t1.day asc
     </select>
+
+    <select id="getRegisterCountByWeek" parameterType="com.tao.yeblog.model.qo.RegisterChartsQO"
+                resultType="com.tao.yeblog.model.dto.RegisterChartsDTO">
+        select t1.day tjny,
+        ifnull(t2.value, 0) value
+        from
+        (
+            select DATE_FORMAT(@cdate := DATE_ADD(@cdate, INTERVAL -1 day), '%Y年%m月%d日') day
+            from
+            (
+                select @cdate := DATE_ADD(sysdate(), INTERVAL+ 1 day)
+                from blog_user
+            ) t0
+            limit 7
+        ) t1
+        left join
+        (
+            select count(*) value,
+            DATE_FORMAT(t.regtime, '%Y年%m月%d日') tjny
+            from blog_user t
+            group by DATE_FORMAT(regtime, '%Y%m%d')
+        ) t2 on t1.day= t2.tjny
+        order by t1.day asc
+    </select>
 </mapper>

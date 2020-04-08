@@ -18,6 +18,7 @@
       t1.email email,
       t1.enable enable,
       t1.reason reason,
+      t1.unabletime unableTime,
       count(t2.id) blogCountHj,
       count(t6.id) ownBlogCountHj,
       count(t10.id) noOwnBlogCountHj,
@@ -123,11 +124,18 @@
     <update id="updateUserInfo" parameterType="com.tao.yeblog.model.dto.UserDTO">
       update blog_user t
       <set>
+        <if test="unableDay != null and unableDay != ''">
+          t.unabletime = date_add(sysdate(), interval #{unableDay} day),
+        </if>
         <if test="enable != null and enable != ''">
           t.enable = #{enable},
         </if>
         <if test="reason != null">
           t.reason = #{reason},
+        </if>
+        <if test="enable == '1'.toString()">
+          t.reason = "",
+          t.unabletime = null,
         </if>
       </set>
       <where>

@@ -28,6 +28,13 @@ public interface BlogTotalMapper {
 
     /**
      * 通过天获取博客量(按博客类型)
+     * @param
+     * @return
+     */
+    List<BlogChartsDTO> getBlogCountByWeek();
+
+    /**
+     * 通过天获取博客量(按博客类型)
      * @param blogChartsQO
      * @return
      */
@@ -60,4 +67,11 @@ public interface BlogTotalMapper {
      * @return
      */
     List<BlogChartsDTO> getBlogCountByColumn(BlogChartsQO blogChartsQO);
+
+    /**
+     * 获取博客量(非草稿有效)
+     * @param
+     * @return
+     */
+    List<BlogChartsDTO> getBlogCountByOne( );
 }

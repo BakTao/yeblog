@@ -29,5 +29,12 @@ public class BlogQO extends BasePage {
 
     private String createTimeZ; //创建时间止
 
+    private String collectionNumsQ; //收藏数起
+
+    private String collectionNumsZ; //收藏数止
+
+    private String praiseNumsQ; //点赞数起
+
+    private String praiseNumsZ; //点赞数止
 
 }

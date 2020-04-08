@@ -1,22 +1,23 @@
 package com.tao.yeblog.service;
 
 import com.tao.yeblog.model.dto.AdminUserDTO;
+import com.tao.yeblog.model.qo.AdminUserQO;
 
 /**
  * 管理员登录Service
  */
-public interface IAdminLoginService {
+public interface IAdminUserService {
 
     /**
      * 获得用户信息
-     * @param adminUserDTO
+     * @param adminUserQO
      * @return
      */
-    AdminUserDTO getAdminUserInfo(AdminUserDTO adminUserDTO);
+    AdminUserDTO getAdminUserInfo(AdminUserQO adminUserQO);
 
     /**
      * 更新用户信息
      * @param adminUserDTO
      */
-    void updateAdminUserInfo(AdminUserDTO adminUserDTO);
+    String updateAdminUserInfo(AdminUserDTO adminUserDTO);
 }

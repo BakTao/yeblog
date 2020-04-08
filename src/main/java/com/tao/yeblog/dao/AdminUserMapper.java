@@ -1,20 +1,21 @@
 package com.tao.yeblog.dao;
 
 import com.tao.yeblog.model.dto.AdminUserDTO;
+import com.tao.yeblog.model.qo.AdminUserQO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 管理员登录Mapper
  */
 @Mapper
-public interface AdminLoginMapper {
+public interface AdminUserMapper {
 
     /**
      * 获得用户信息
-     * @param adminUserDTO
+     * @param adminUserQO
      * @return
      */
-    AdminUserDTO getAdminUserInfo(AdminUserDTO adminUserDTO);
+    AdminUserDTO getAdminUserInfo(AdminUserQO adminUserQO);
 
     /**
      * 更新用户信息

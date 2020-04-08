@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tao.yeblog.dao.AdminLoginMapper">
+<mapper namespace="com.tao.yeblog.dao.AdminUserMapper">
 
-    <select id="getAdminUserInfo" parameterType="com.tao.yeblog.model.dto.AdminUserDTO"
+    <select id="getAdminUserInfo" parameterType="com.tao.yeblog.model.qo.AdminUserQO"
             resultType="com.tao.yeblog.model.dto.AdminUserDTO">
         select t.name name,
         t.loginid loginId,
@@ -10,8 +10,13 @@
         t.lastlogip lastLogIp,
         t.lastlogtime lastLogTime
         from sys_user_admin t
-        where t.loginid = #{loginId}
-        and t.password = #{password}
+        where 1=1
+        <if test="loginId != null and loginId != '' ">
+            and t.loginid = #{loginId}
+        </if>
+        <if test="password != null and password != '' ">
+            and t.password = #{password}
+        </if>
     </select>
 
     <select id="updateAdminUserInfo" parameterType="com.tao.yeblog.model.dto.AdminUserDTO">
@@ -22,6 +27,9 @@
             </if>
             <if test="logTime != null and logTime != '' ">
                 t.lastlogtime = sysdate(),
+            </if>
+            <if test="newPassword != null and newPassword != '' ">
+                t.password = #{newPassword},
             </if>
         </set>
         where t.loginid = #{loginId}
