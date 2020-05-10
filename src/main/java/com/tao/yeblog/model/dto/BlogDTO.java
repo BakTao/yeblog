@@ -26,6 +26,8 @@ public class BlogDTO {
 
     private String content; //内容
 
+    private String contentmd; //内容
+
     private String cover; //封面
 
     private String enable; //是否有效
@@ -38,4 +40,7 @@ public class BlogDTO {
 
     private String praiseNums; //点赞数
 
+    private String viewNums; //观看数
+
+    private String commentNums; //评论数
 }

@@ -1,12 +1,15 @@
 package com.tao.yeblog.service.impl;
 
 import com.tao.yeblog.dao.BlogTotalMapper;
+import com.tao.yeblog.dao.CommentTotalMapper;
 import com.tao.yeblog.dao.OrderTotalMapper;
 import com.tao.yeblog.dao.RegisterTotalMapper;
 import com.tao.yeblog.model.dto.BlogChartsDTO;
+import com.tao.yeblog.model.dto.CommentChartsDTO;
 import com.tao.yeblog.model.dto.OrderChartsDTO;
 import com.tao.yeblog.model.dto.RegisterChartsDTO;
 import com.tao.yeblog.model.qo.BlogChartsQO;
+import com.tao.yeblog.model.qo.CommentChartsQO;
 import com.tao.yeblog.model.qo.OrderChartsQO;
 import com.tao.yeblog.model.qo.RegisterChartsQO;
 import com.tao.yeblog.service.IDataTotalService;
@@ -26,6 +29,9 @@ public class DataTotalService implements IDataTotalService {
 
     @Autowired
     private OrderTotalMapper orderTotalMapper;
+
+    @Autowired
+    private CommentTotalMapper commentTotalMapper;
 
     @Override
     public List<RegisterChartsDTO> getRegisterCount(RegisterChartsQO registerChartsQO) {
@@ -108,5 +114,16 @@ public class DataTotalService implements IDataTotalService {
     public List<OrderChartsDTO> getOrderMoneyCountByOne() {
         return orderTotalMapper.getOrderMoneyCountByOne();
 
+    }
+
+    @Override
+    public List<CommentChartsDTO> getCommentCount(CommentChartsQO commentChartsQO) {
+        if("1".equals(commentChartsQO.getSjwd())){
+            return commentTotalMapper.getCommentCountByYear(commentChartsQO);
+        }else if("2".equals(commentChartsQO.getSjwd())){
+            return commentTotalMapper.getCommentCountByMonth(commentChartsQO);
+        }else{
+            return commentTotalMapper.getCommentCountByDay(commentChartsQO);
+        }
     }
 }

@@ -37,4 +37,12 @@ public class BlogQO extends BasePage {
 
     private String praiseNumsZ; //点赞数止
 
+    private String viewNumsQ; //观看数起
+
+    private String viewNumsZ; //观看数止
+
+    private String commentNumsQ; //评论数起
+
+    private String commentNumsZ; //评论数止
+
 }

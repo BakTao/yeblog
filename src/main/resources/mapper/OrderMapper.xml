@@ -12,7 +12,8 @@
       t1.address address,
       t1.remark remark,
       t1.expressid expressId,
-      t1.userphone userPhone
+      t1.userphone userPhone,
+      t1.name userName
       from yeblog_db.order t1
       left join blog_user t2 on t1.userid = t2.id
       where 1=1
@@ -72,7 +73,7 @@
           t4.nums
           from yeblog_db.order t3
           left join order_shop t4 on t3.id = t4.orderid
-          where t3.enable = "2"
+          where t3.enable = "3"
         ) t2 on t1.id = t2.goodsid
         where 1=1
         group by t1.id
@@ -90,7 +91,7 @@
         t4.nums
         from yeblog_db.order t3
         left join order_shop t4 on t3.id = t4.orderid
-        where t3.enable = "2"
+        where t3.enable = "3"
       ) t2 on t1.id = t2.goodsid
       group by t1.id
       order by nums desc,priceCount desc
@@ -101,6 +102,9 @@
       <set>
         <if test="expressId != null and expressId != ''">
           t.expressid = #{expressId},
+        </if>
+        <if test="enable != null and enable != ''">
+          t.enable = #{enable},
         </if>
       </set>
       where 1=1

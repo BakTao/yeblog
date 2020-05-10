@@ -2,9 +2,11 @@ package com.tao.yeblog.rest;
 
 import com.tao.yeblog.common.Response;
 import com.tao.yeblog.model.dto.BlogChartsDTO;
+import com.tao.yeblog.model.dto.CommentChartsDTO;
 import com.tao.yeblog.model.dto.OrderChartsDTO;
 import com.tao.yeblog.model.dto.RegisterChartsDTO;
 import com.tao.yeblog.model.qo.BlogChartsQO;
+import com.tao.yeblog.model.qo.CommentChartsQO;
 import com.tao.yeblog.model.qo.OrderChartsQO;
 import com.tao.yeblog.model.qo.RegisterChartsQO;
 import com.tao.yeblog.service.IDataTotalService;
@@ -105,5 +107,15 @@ public class DataTotalContorller {
     @PostMapping("/getOrderMoneyCountByOne")
     public Response<List<OrderChartsDTO>> getOrderMoneyCountByOne(){
         return Response.successData(dataTotalService.getOrderMoneyCountByOne());
+    }
+
+    /**
+     * 获取评论量
+     * @param commentChartsQO
+     * @return
+     */
+    @PostMapping("/getCommentCount")
+    public Response<List<CommentChartsDTO>> getCommentCount(@RequestBody CommentChartsQO commentChartsQO){
+        return Response.successData(dataTotalService.getCommentCount(commentChartsQO));
     }
 }

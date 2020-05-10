@@ -922,27 +922,49 @@
 
     <select id="getBlogCountByColumn" parameterType="com.tao.yeblog.model.qo.BlogChartsQO"
             resultType="com.tao.yeblog.model.dto.BlogChartsDTO">
-        select count(t1.id) value,
-	    concat(
-	    ifnull(t2.name,''),
-	    '(',
-	    (case
-	    when t1.type= "0" then "原创"
-	    when t1.type= "1" then "转载"
-	    when t1.type= "2" then "草稿"
-	    end),
-	    ')'
-	    ) name
-        from blog t1
-        left join yeblog_db.column t2 on t1.columnid= t2.id
-        where t1.enable= "1"
-        <if test="columnId !=null and columnId != ''">
-            and t2.columnid in
-            <foreach collection="columnIds" item="columnId" open="(" close=")" separator=",">
-                #{columnId}
-            </foreach>
-        </if>
-        group by t1.columnid,t1.type;
+        select t.*  from (
+            select count(t1.id) value,
+            concat(
+            ifnull(t2.name,''),
+            '(',
+            (case
+            when t1.type= "0" then "原创"
+            when t1.type= "1" then "转载"
+            end),
+            ')'
+            ) name
+            from blog t1
+            left join yeblog_db.column t2 on t1.columnid= t2.id
+            where t1.enable= "1" and t1.type &lt;> "2"
+            <if test="columnId !=null and columnId != ''">
+                and t2.columnid in
+                <foreach collection="columnIds" item="columnId" open="(" close=")" separator=",">
+                    #{columnId}
+                </foreach>
+            </if>
+            group by t1.columnid,t1.type
+        ) t
+        union
+        select t.* from (
+            select count(t1.id) value,
+            concat(
+            '(',
+            (case
+            when t1.type= "2" then "草稿"
+            end),
+            ')'
+            ) name
+            from blog t1
+            left join yeblog_db.column t2 on t1.columnid= t2.id
+            where t1.enable= "1" and t1.type = "2"
+            <if test="columnId !=null and columnId != ''">
+                and t2.columnid in
+                <foreach collection="columnIds" item="columnId" open="(" close=")" separator=",">
+                    #{columnId}
+                </foreach>
+            </if>
+            group by t1.columnid,t1.type
+        ) t
     </select>
 
     <select id="getBlogCountByWeek" resultType="com.tao.yeblog.model.dto.BlogChartsDTO">

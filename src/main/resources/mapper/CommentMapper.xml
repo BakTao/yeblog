@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.yeblog.dao.CommentMapper">
+
+    <select id="pageCommentInfo" parameterType="com.tao.yeblog.model.qo.CommentQO"
+            resultType="com.tao.yeblog.model.dto.CommentDTO">
+        select t.*
+        <if test="ifPraise != null and ifPraise != ''">
+        , if(t6.userid is null, "false", "true") ifPraise
+        </if>
+        from
+        (
+            select t5.*,(@i:= @i+ 1) as rank
+            from(
+                select t1.id id,
+                t1.time time,
+                t1.content content,
+                t1.enable enable,
+                t2.loginid userId,
+                t2.name userName,
+                t3.url userPhoto,
+                count(t4.commentid) praiseNums
+                from blog_comment t1
+                left join blog_user t2 on t1.userid= t2.id
+                left join sys_file t3 on t2.userphoto= t3.id
+                left join comment_praise t4 on t1.id= t4.commentid
+                where t1.blogid=(
+                    select id
+                    from blog t
+                    where t.blogid= #{blogId}
+                )
+                group by t1.id
+                order by t1.time
+            ) t5,
+            (SELECT @i:= 0) as i
+        ) t
+        <if test="ifPraise != null and ifPraise != ''">
+        left join
+        (
+          select *
+          from comment_praise
+          where userid = (select id from blog_user where loginid = #{ifPraise})
+        ) t6 on t.id = t6.commentid
+        </if>
+        where t.enable= "1"
+        order by ${sort} desc
+
+    </select>
+
+    <select id="listReplyCommentInfo" parameterType="com.tao.yeblog.model.qo.CommentQO"
+                resultType="com.tao.yeblog.model.dto.CommentDTO">
+        select t1.id id,
+        t2.loginid userId,
+        t2.name userName,
+        t4.url userPhoto,
+        t3.loginid replyUserId,
+        t3.name replyUserName,
+        t1.content content,
+        t1.time time
+        from comment_reply t1
+        left join blog_user t2 on t1.userid = t2.id
+        left join blog_user t3 on t1.replyuserid = t3.id
+        left join sys_file t4 on t2.userphoto = t4.id
+        where t1.commentid = #{commentId}
+        order by time asc
+    </select>
+
+    <select id="pageUserCommentInfo" parameterType="com.tao.yeblog.model.qo.CommentQO"
+            resultType="com.tao.yeblog.model.dto.CommentDTO">
+        select t.* from
+        (
+            select t3.*,
+            count(t4.userid) praiseNums
+            from(
+                select t1.id id,
+                tt.loginid userId,
+                tt.name userName,
+                null replyUserId,
+                null replyUserName,
+                t1.time time,
+                t1.content content,
+                t1.enable enable,
+                t1.reason reason,
+                t2.title title,
+                t2.blogid blogId
+                from blog_comment t1
+                left join blog t2 on t1.blogid= t2.id
+                left join blog_user tt on t1.userid = tt.id
+            ) t3
+            left join comment_praise t4 on t3.id= t4.commentid
+            group by t3.id
+            union
+            select t1.id,
+                   t5.loginid,
+                   t5.name,
+                   t4.loginid,
+                   t4.name,
+                   t1.time,
+                   t1.content,
+                   t1.enable,
+                   t1.reason,
+                   t3.title,
+                   t3.blogid,
+                   null
+            from comment_reply t1
+            left join blog_comment t2 on t1.commentid= t2.id
+            left join blog t3 on t2.blogid= t3.id
+            left join blog_user t4 on t1.replyuserid= t4.id
+            left join blog_user t5 on t1.userid= t5.id
+        ) t
+        where 1=1
+        <if test="userId != null and userId != ''">
+            and (t.userId like (concat('%',#{userId},'%')) or t.userName like (concat('%',#{userId},'%')))
+        </if>
+        <if test="blogId != null and blogId != ''">
+            and (t.title like (concat('%',#{blogId},'%')) or t.blogId like (concat('%',#{blogId},'%')))
+        </if>
+        <if test="timeQ !=null and timeQ != ''">
+            and t.time >= date_format(#{timeQ},'%Y-%m-%d')
+        </if>
+        <if test="timeZ !=null and timeZ != ''">
+            and t.time &lt;= date_format(#{timeZ},'%Y-%m-%d')
+        </if>
+        <if test="enable !=null and enable != ''">
+            and t.enable = #{enable}
+        </if>
+        <if test="praiseNumsQ !=null and praiseNumsQ != ''">
+            and t.praiseNums >= #{praiseNumsQ}
+        </if>
+        <if test="praiseNumsZ !=null and praiseNumsZ != ''">
+            and t.praiseNums &lt;= #{praiseNumsZ}
+        </if>
+        order by t.time desc
+    </select>
+
+    <select id="pagePraiseCommentInfo" parameterType="com.tao.yeblog.model.qo.CommentQO"
+            resultType="com.tao.yeblog.model.dto.CommentDTO">
+        select t.* from (
+            select t5.*,
+            count(t6.userid) praiseNums
+            from
+            (
+                select t1.commentid id,
+                       t1.time praiseTime,
+                       t3.blogid blogId,
+                       t3.title title,
+                       t4.loginid userId,
+                       t4.name userName,
+                       t2.time time,
+                       t2.content content,
+                       t2.enable enable,
+                       t2.reason reason
+                from comment_praise t1
+                left join blog_comment t2 on t1.commentid= t2.id
+                left join blog t3 on t2.blogid= t3.id
+                left join blog_user t4 on t2.userid= t4.id
+                where t1.userid=(
+                  select id
+                  from blog_user
+                  where loginid= #{userId}
+                )
+            ) t5
+            left join comment_praise t6 on t5.id= t6.commentid
+            group by t5.id
+        ) t
+        order by t.praiseTime desc
+    </select>
+
+    <insert id="createComment" parameterType="com.tao.yeblog.model.dto.CommentDTO">
+      insert into blog_comment
+      (id,
+      userid,
+      blogid,
+      time,
+      content,
+      enable
+      )
+      select
+      uuid(),
+      t2.id,
+      (select t1.id from blog t1 where t1.blogid = #{blogId}),
+      sysdate(),
+      #{content},
+      "1" from blog_user t2  where t2.loginid = #{userId}
+
+    </insert>
+
+    <insert id="createReplyComment" parameterType="com.tao.yeblog.model.dto.CommentDTO">
+      insert into comment_reply
+      (id,
+      commentid,
+      userid,
+      replyuserid,
+      content,
+      time
+      )
+      select
+      uuid(),
+      #{id},
+      t2.id,
+      (select t1.id from blog_user t1 where t1.loginid = #{replyUserId}),
+      #{content},
+      sysdate() from blog_user t2 where t2.loginid = #{userId}
+
+    </insert>
+
+    <insert id="createCommentPraise" parameterType="com.tao.yeblog.model.dto.CommentDTO">
+      insert into comment_praise
+      (commentid,
+      userid,
+      time
+      )
+      select
+      #{id},
+      t1.id,
+      sysdate() from blog_user t1 where t1.loginid = #{userId}
+
+    </insert>
+
+    <update id="updateCommentInfo" parameterType="com.tao.yeblog.model.dto.CommentDTO">
+      update blog_comment t
+      <set>
+        <if test="enable != null and enable != ''">
+          t.enable = #{enable},
+        </if>
+        <if test="reason != null">
+          t.reason = #{reason},
+        </if>
+      </set>
+      where 1=1
+      <if test="id !=null and id != ''">
+        and t.id = #{id}
+      </if>
+    </update>
+
+    <update id="updateReplyCommentInfo" parameterType="com.tao.yeblog.model.dto.CommentDTO">
+      update comment_reply t
+      <set>
+        <if test="enable != null and enable != ''">
+          t.enable = #{enable},
+        </if>
+        <if test="reason != null">
+          t.reason = #{reason},
+        </if>
+      </set>
+      where 1=1
+      <if test="id !=null and id != ''">
+        and t.id = #{id}
+      </if>
+    </update>
+
+    <delete id="deleteCommentPraise" parameterType="com.tao.yeblog.model.dto.CommentDTO">
+      delete from comment_praise
+      where commentid = #{id}
+      and userid =  (select t1.id from blog_user t1 where t1.loginid = #{userId})
+
+    </delete>
+
+    <delete id="deleteComment" parameterType="com.tao.yeblog.model.dto.CommentDTO">
+      delete from blog_comment
+      where id = #{id}
+      and userid =  (select t1.id from blog_user t1 where t1.loginid = #{userId})
+
+    </delete>
+
+    <delete id="deleteReplyComment" parameterType="com.tao.yeblog.model.dto.CommentDTO">
+      delete from comment_reply
+      where id = #{id}xx+
+      and userid =  (select t1.id from blog_user t1 where t1.loginid = #{userId})
+
+    </delete>
+</mapper>

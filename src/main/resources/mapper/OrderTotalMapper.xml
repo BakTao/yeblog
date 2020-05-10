@@ -25,7 +25,7 @@
               DATE_FORMAT(t.createtime, '%Y年') tjny
               from yeblog_db.order t
               where 1= 1
-              and t.enable= "1"
+              and t.enable in ("1","2")
               group by DATE_FORMAT(t.createtime, '%Y')
             ) t2 on t1.day= t2.tjny
             order by t1.day
@@ -53,7 +53,7 @@
               DATE_FORMAT(t.createtime, '%Y年') tjny
               from yeblog_db.order t
               where 1= 1
-              and t.enable= "2"
+              and t.enable= "3"
               group by DATE_FORMAT(t.createtime, '%Y')
             ) t2 on t1.day= t2.tjny
             order by t1.day
@@ -84,7 +84,7 @@
               DATE_FORMAT(t.createtime, '%Y年%m月') tjny
               from yeblog_db.order t
               where 1= 1
-              and t.enable= "1"
+              and t.enable in ("1","2")
               group by DATE_FORMAT(t.createtime, '%Y%m')
             ) t2 on t1.day= t2.tjny
             order by t1.day
@@ -113,7 +113,7 @@
               DATE_FORMAT(t.createtime, '%Y年%m月') tjny
               from yeblog_db.order t
               where 1= 1
-              and t.enable= "2"
+              and t.enable= "3"
               group by DATE_FORMAT(t.createtime, '%Y%m')
             ) t2 on t1.day= t2.tjny
             order by t1.day
@@ -144,7 +144,7 @@
               DATE_FORMAT(t.createtime, '%Y年%m月%d日') tjny
               from yeblog_db.order t
               where 1= 1
-              and t.enable= "1"
+              and t.enable in ("1","2")
               group by DATE_FORMAT(t.createtime, '%Y%m%d')
             ) t2 on t1.day= t2.tjny
             order by t1.day
@@ -173,7 +173,7 @@
               DATE_FORMAT(t.createtime, '%Y年%m月%d日') tjny
               from yeblog_db.order t
               where 1= 1
-              and t.enable= "2"
+              and t.enable= "3"
               group by DATE_FORMAT(t.createtime, '%Y%m%d')
             ) t2 on t1.day= t2.tjny
             order by t1.day
@@ -199,7 +199,7 @@
             DATE_FORMAT(t.createtime, '%Y年') tjny
             from yeblog_db.order t
             where 1= 1
-            and t.enable = "2"
+            and t.enable = "3"
             group by DATE_FORMAT(t.createtime, '%Y')
         ) t2 on t1.day= t2.tjny
         order by t1.day asc
@@ -224,7 +224,7 @@
             DATE_FORMAT(t.createtime, '%Y年%m月') tjny
             from yeblog_db.order t
             where 1= 1
-            and t.enable = "2"
+            and t.enable = "3"
             group by DATE_FORMAT(t.createtime, '%Y%m')
         ) t2 on t1.day= t2.tjny
         order by t1.day asc
@@ -249,7 +249,7 @@
             DATE_FORMAT(t.createtime, '%Y年%m月%d日') tjny
             from yeblog_db.order t
             where 1= 1
-            and t.enable = "2"
+            and t.enable = "3"
             group by DATE_FORMAT(t.createtime, '%Y%m%d')
         ) t2 on t1.day= t2.tjny
         order by t1.day asc

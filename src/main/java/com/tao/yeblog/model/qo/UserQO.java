@@ -31,4 +31,6 @@ public class UserQO extends BasePage {
 
     private String blogCountZ;   //博客数止
 
+    private String blogEnable;   //博客有效
+
 }

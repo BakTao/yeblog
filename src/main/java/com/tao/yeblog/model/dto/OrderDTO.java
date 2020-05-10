@@ -22,6 +22,8 @@ public class OrderDTO {
 
     private String userPhone;   //手机
 
+    private String userName;        //姓名
+
     private String remark;   //备注
 
     private String expressId;   //物流id
